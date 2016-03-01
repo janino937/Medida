@@ -1,0 +1,82 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Proyecto de grado}
+\newtheorem{theo}{Teorema}
+\newtheorem{lemma}[theo]{Lema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\usepackage{amsfonts}
+\usepackage{psfrag}
+\frenchspacing
+\newcommand{\Sp}{\textrm{Sp}}
+\newcommand{\Hom}{\textrm{Hom}}
+\newcommand{\id}{\textrm{id}}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item (*) Sean $K$ y $Y$ espacios métricos, con $K$ compacto. Muestre que toda función continua $f : K \rightarrow Y$ es uniformemente continua utilizando la caracterización de los espacios compactos como los espacios que son completos y totalmente acotados. (N.B. Por favor utilizen directamente la caracterización, el ejercicio es para que ustedes escriban una demostración corta y diferente de la demostración del libro de Rudin de este hecho.)
+
+\begin{proof}
+Idea principal de la demostración propuesta por Santiago Cortés.
+
+Supongase por contradicción que $f$ no es uniformemente compacta, es decir, $$\exists \epsilon > 0 : \forall \delta > 0 : \exists x, y : d(x,y)<\delta \wedge d(f(x),f(y))\geq \epsilon $$ 
+
+De hecho se puede demostrar que deben existir infinitas parejas $(x,y)$ que cumplen la condición. De lo contrario se podria tomar como $\delta$ un valor menor a la minima distancia entre los finitos puntos encontrados, satisfaciendo así la condición que queremos negar.
+
+Ahora utilizando el hecho de que $K$ es totalmente acotada tenemos que para cualquier $\delta<0$ existe un conjunto finito de bolas de radio $\delta$ tales que cubren todo $ K $. Luego, por el principio del palomar, existe al menos una de estas bolas $B_{\delta}(x)$ que debe contener infinitos de estos puntos. Esta bola a su vez es totalmente acotada y luego, usando el mismo argumento anterior, es posible encontrar una bola de tamaño $\delta' < \delta$ tal que su intersección con la bola anterior no es vacía y tambien incluye infinitos de los puntos descritos anteriormente. De esta manera es posible construir una sucesión de bolas $ U_n$ cada una con una cantidad infinita de puntos $x$ y puntos $y$, como se describieron anteriormente y que además cumplen las siguientes propiedades.
+
+\begin{itemize}
+
+\item $ U_n $ es una bola de radio $ 1/2^n $
+\item $ U_n \cap U_{n+1} \not = \emptyset $
+
+\end{itemize}
+
+Luego, podemos construir una sucesión tal que el elemento par $x_{2n}$ sea uno de los infinitos puntos en la bola $U_n$ descritos anteriormente y $x_{2n+1} $ sea el elemento correspondiente tal que $d(x_{2n},x_{2n+1})<1/2^n$ y $d(f(x_{2n}),f(x_{2n+1}))>\epsilon $.
+
+Ahora, por convergencia de la serie $\Sigma 1/2^n$, la sucesión anterior es una sucesión de Cauchy que converge usando nuestro supuesto que $X$ es completo. Si tomamos la sucesión $f(x_n)$ formada por las imagenes de la secuencia, sabemos por continuidad de $f$ que esta sucesión también debe converger en $ Y $ y por lo tanto debe ser de Cauchy. Sin embargo, por construcción $f(x_n) $ no es de Cauchy, puesto que para cualquier $ N $ tenemos que $d(f(x_{2N}),f(x_{2N+1}))>\epsilon $.
+Por lo tanto, llegamos a una contradicción. 
+\end{proof}
+
+\item Determine si la siguiente función $f : [0,1] \rightarrow \mathbf{R}$ es integrable según Riemann o no lo es: 
+$$f(x) := \left\{
+	\begin{array}{lll}
+		0 & \mbox{si } x = 0 \\
+		0 & \mbox{si } x \not\in \mathbf{Q} \\
+		q & \mbox{si } x = \frac{p}{q} \mbox{ con } p\mbox{, } q \mbox{ coprimos. }
+	\end{array}
+\right.$$
+
+\begin{proof}
+
+Vamos a demostrar que la función anterior es integrablo segun Riemman utilizando el criterio de que para cualquier $\epsilon $ existe una partición $P$ tal que $U(f,P)-L(f,P) < \epsilon $. Puesto que los irracionales son densos en cualquier intervalo, se puede ver que para cualquier partición $P$, $L(f,P) = 0$. Por lo tanto, el problema se resume a probar que $U(f,P) $ se puede hacer arbitrariamente pequeño.
+
+Para cualquier $n \in \mathbf{N}$ tenemos que existen finitos $ x \in [0,1] $ tales que $ f(x) = 1/n $, pues para tener dicha imagen, el $ x $ debe ser de la forma $p/n$ con $p \in \mathbf{N} $ y $0 < p \leq n $ y por lo tanto solo pueden haber a lo sumo $ n $ elementos.
+
+Ahora, si tomamos un $\epsilon > 0 $, existen finitos $n \in \mathbf{N} $ tales que $1/n > \epsilon $ y, por lo tanto, existen finitos $ x \in [0,1]$ tales que $f(x)> \epsilon/ 2$ (Unión finita de finitos es finita). Sea $m$ el número de estos puntos y sea $\{p_n\}$ la lista ordenada de estos puntos. Para cada punto $p_n $ es posible encontrar dos puntos $x_{2n-1}$ y $x_{2n}$ tales que $x_{2n-1}\leq p_n \leq x_{2n} $ y $x_{2n}-x_{2n-1} < \frac{\epsilon}{2m}$. Adicionalmente puedo elegir los puntos de tal manera que si $i > j $ entonces $x_i > x_j $. Luego, a partir de los $x_i$ escogidos y tomando $x_0 = 0$ y $x_{2m} = 1 $ se puede construir una partición $ P $.
+
+Para esta partición, si calculamos los valores de $M_i$ nos podemos dar cuenta de dos casos.
+Sí $ i $ es impar entonces $ p_n \in [x_{i},x_{i+1}] $ y por lo tanto $ M_i(x_i-x_{i-1}) \leq M_i \frac{\epsilon}{2m} \leq \frac{\epsilon}{2m}$ (la ultima desigualdad se obtiene partiendo de que $ 0\leq  M_i \leq 1 $).  Por lo cual, si solamente hacemos la suma de los intervalos cuyo extremo izquierdo tiene indice impar tenemos que $$ \sum_{j=1}^{m} M_{2j}(x_{2j}-x_{2j-1}) < \sum_{j=0}^{m} \frac{\epsilon}{2m} < \epsilon/2. $$
+Si por otro lado $ i $ es par entonces podemos inferir que $ M_i < \epsilon/2 $ puesto que no hay ningun $p_n$ en el intervalo $[x_{i},x_{i+1}]$. Por lo cual si solamente hacemos la suma de los intervalos cuyo extremo izquierdo tiene indice par tenemos que $$ \sum_{j=0}^{m} M_{2j+1}(x_{2j+1}-x_{2j}) < \epsilon/2 \sum_{j=0}^{m} (x_{2j+1}-x_{2j}) < \epsilon/2 $$.
+
+Observese que la ultima desigualdad se tiene porque la suma de las distancias entre los intervalos de la partición debe ser igual a 1 por lo que la sumatoria debe ser menor o igual.
+
+Luego utilizando estas dos desigualdades obtenemos que $$U(f,P) < \epsilon/2 + \epsilon/2 = \epsilon $$.
+
+\end{proof}
+\end{enumerate}
+
+\end{document}

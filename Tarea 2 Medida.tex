@@ -1,0 +1,160 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Tarea 2}
+\newtheorem{theo}{Teorema}
+\newtheorem{lemma}[theo]{Lema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\usepackage{amsfonts}
+\usepackage{psfrag}
+\frenchspacing
+\newcommand{\Sp}{\textrm{Sp}}
+\newcommand{\Hom}{\textrm{Hom}}
+\newcommand{\id}{\textrm{id}}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item (Necessity for the space on which we construct the measure to be locally compact.) Describe $C_0(\mathbb{Q})$. Show that if $X$ is locally compact and Hausdorff, then $C_0(X)$ contains more than just the zero function.
+\begin{proof}
+
+En primer lugar vamos a demostrar que $C_0(\mathbb{Q}) = \{\textbf{0}\}$ (\textbf{0} denota la función constante 0).
+
+Supongase por contradicción que existe una función $ f \in C_0(\mathbb{Q})$ distinta de \textbf{0}. Por lo tanto, existe un $q \in \mathbb{Q}$ tal que $||f(q)||>0$. Tomese $\epsilon = ||f(q)||$. Puesto que  $ f \in C_0(\mathbb{Q})$ existe un $ K $ tal que si $p \not \in K$ entonces $f(p)< \epsilon/3$. Adicionalmente tenemos que $f$ es continua. Por lo tanto, existe una bola $B_\delta(q) $ tal que si $p \in B_\delta(q) $ entonces $||f(q)-f(p)||<\epsilon/3$.
+
+Por desigualdad triangular tenemos lo siguiente
+
+$$ ||f(q)-f(p)||+||f(p)-0|| \geq ||f(q)-0|| $$
+$$ ||f(p)|| \geq ||f(q)||-||f(q)-f(p)|| > \epsilon - \epsilon/3 = 2\epsilon/3 >\epsilon/3 $$
+
+Esto implica que $B_\delta(q) \subseteq K $ pero esto es una contradicción porque todo compacto en $ K $ tiene interior vacío.
+
+Ahora, vamos a demostrar que si un espacio $X$ es localmente compacto y de Hausdorff entonces existe una función distinta de \textbf{0} en $ C_{00}(X) $ y por lo tanto también en $C_{0}(X)$. Por topología sabemos que $X$ es un espacio completamente regular o de Tychonoff. Tomemos un punto $x \in X$. Puesto que $ X $ es localmente compacto existen un compacto $K$ y un abierto $U$ tales que $ x \in U \subseteq K $. Luego podemos utilizar que $X$ es completamente regular para separar el punto $x$ del conjunto cerrado $U^C$ por medio de una función continua $f$. Esta función es tal que $ f(U^C) = \{0\}$ y $f(x) = 1 $. Por algebra de conjuntos sabemos que $ K^C \subseteq U^C $ por lo que tenemos que $ f(K^C) = \{0\}$. Es decir que la función tiene soporte compacto dado por $K$. Por lo tanto, concluimos que $ f \not = 0 $ y $ f \in C_{00}(\mathbb{X}) $.
+\end{proof}
+
+\item  (Properties of $\mathfrak{M}$.)
+Denote by $\mathfrak{M}$ the set of lower semicontinuous functions as defined in Definition 7.20, page 88 of the textbook.
+\begin{enumerate}
+\item Show that $f$ is lower semicontinuous at $x_0$ if and only if for every real number $ \alpha < f(x_{0}) $, there is a neighbourhood $ U $ of $ x_{0} $ such that $ f(x) > \alpha $ for all $ x \in U$. (Here $ f(x_{0}) $ can be a real number or +$ \infty $.)
+
+\begin{proof}
+
+La definición de función \textit{semicontinua hacia abajo} según el libro es la siguiente:
+
+La función $f: X \rightarrow \mathbb{R} \cup \{\infty\} $ es semicontinua hacia abajo en el punto $x_0$ si cumple la siguiente condición:
+
+Si $ f(x_0) < \infty $ entonces para todo $ \epsilon > 0 $ existe un vecindario $ U $ de $ x_0 $ tal que $ f(x) > f(x_0) - \epsilon$ para todo $ x \in U $. Si $ f(x)= \infty $ entonces para cada número positivo $ \alpha $ existe un vecindario $ U $ de $ x_0 $ tal que $ f(x)>\alpha $ para todo $x \in U$.
+
+En primer lugar observesé que para el caso en que $f(x_0) = \infty $ las definiciones son equivalentes puesto que todo número $ \alpha $ es menor a $ \infty $.
+
+Ahora, para el caso en que $f(x_0) < \infty $ si realizamos la sustitución $ \alpha = f(x_0) - \epsilon $. Claramente, para todo $\alpha $ existe un $\epsilon $ tal que $f(x_0) - \epsilon = \alpha$ y adicionalmente si
+$\epsilon > 0$ entonces $\alpha < f(x_0)$. Por lo tanto, las deficiones son equivalentes.
+
+\end{proof}
+
+\item Show that for $ f : X \rightarrow (-\infty,+\infty] $ we have that $ f \in \mathfrak{M} $ if and only if $ f^{-1}((t,+\infty]) $ is open in $ X $ for every $ t \in R $.
+
+Para una de las direcciones tomese cualquier $x_0 \in X $, queremos probar que $f $ es semicontinua hacia abajo para este punto. Entonces tomemos cualquier $\alpha < f(x_0) $. Vemos que $ f^{-1}((\alpha,+\infty]) $ es un abierto tal que contiene a $x_0 $ y todo imagen de este conjunto es mayor que $ \alpha $. Por lo tanto es semicontinua hacia abajo.
+
+Para la otra dirección tomese cualquier conjunto de la forma $ f^{-1}((t,+\infty]) $ y tome cualquier $x_0$ en el conjunto. Puedo tomar un $\alpha $ tal que $t<\alpha < f(x_0)$ y por semicontinuidad hacia abajo se que existe un vencidario U de $x_0 $ tal que para todo $x \in U $, $f(x)>\alpha $ esto quiere decir que $f(U) \subseteq (\alpha, \infty ] \subseteq (t, \infty] $ y por lo tanto $U $ es una vecindad de $x_0$ contenida en $ f^{-1}((t,+\infty]) $. Probamos que cualquier $x_0 $ es interior por lo cual $ f^{-1}((t,+\infty]) $ es abierto.
+
+\end{enumerate} 
+
+\item (Concrete examples of the first Daniell extension.)
+\begin{enumerate} \item Let $S : C_{00}(\mathbb{R}) \rightarrow \mathbb{C} $ denote the Riemann integral. Compute carefully $\overline{S}(\chi_U )$, where $\chi_U$
+denotes the characteristic function of $U$ and $U$ is any open subset of $\mathbb{R}$.
+
+\begin{proof}
+
+Antes de calcular $\overline{S}$, observese que $\chi_U$ es una función semicontinua hacia abajo. Esto lo podemos demostrar utilizando el punto b del punto anterior, es decir, demostrando que para todo $t \in \mathbb{R}$, $f^{-1}((t,\infty))$ es abierto. Tenemos varios casos: Si $t<0$ entonces   $\{0,1\} \subseteq < (t,\infty) $ y por lo tanto $f^{-1}((t,\infty)) = f^{-1}(\{0,1\}) = \mathbb{R} $ que es abierto.
+
+Si $0\leq t< 1$ entonces $f^{-1}((t,\infty)) = f^{-1}(\{1\}) = U  $ que es abierto por hipótesis.
+
+Por ultimo, si $1 \leq t $ entonces $f^{-1}((t,\infty)) = f^{-1}(\emptyset) = \emptyset  $ que es abierto.
+
+
+
+Vamos primero a demostrar que para $U = (a,b)$ con $a,b \in \mathbb{R} $, $ \overline{S}(\chi_U) = b-a $.
+
+Recordemos que $\overline{S}(\chi_U) = \text{sup}\{S(f): f \in C_{00}(\mathbb{R}) \wedge f \leq \chi_U\} $. Vamos a demostrar que $ b - a$ es este supremo. Primero para probar que es cota superior observese que para cualquier $f<\chi_U$ si $x \not  \in (a,b)$ entonces $f(x)=0$. Luego claramente la función se desvanece fuera de $[a,b]$. Por lo tanto, por lo demostrado en (8.12) del libro, $S(f) = \int_a^b f(x)dx $. Puesto que $f$ es acotada por 1 concluimos que $S(f) = \int_a^b f(x)dx < (b-a)*(1) = b-a $.
+
+Ahora demostremos que no existe una cota menor. Para demostrar esto tomemos para cualquier $\alpha < b -a $ la función $ f_\alpha $ definida de la siguiente manera.
+
+$$ f_\alpha(x) :=
+    \begin{cases}
+      0 & x\leq a \\
+      \frac{x-a}{a'-a} & a \leq x \leq a'\\
+      1 & a'\leq x \leq b' \\
+      \frac{b-x}{b-b'} & b' \leq x \leq b\\
+      0 & b \leq x
+    \end{cases}
+$$
+donde $ \displaystyle a'= \frac{b+a-\alpha}{2}$ y $\displaystyle b'= \frac{b+a+\alpha}{2}$.
+
+Es facil ver que esta función es continua y menor a $\chi_U $ y adicionalmente se desvanece fuera de $[a,b]$ y todos sus valores son mayores a 0. Por lo tanto, esta función pertenece a $C_00(\mathbb{R})$. Calculando el valor de $S(f_\alpha)$ obtenemos:
+
+\begin{eqnarray*}
+S(f_\alpha) & = & \int_a^b f_\alpha(x) dx \\
+&=& \int_a^{a'} \frac{x-a}{a'-a} dx + \int_{a'}^{b'} dx +\int_{b'}^{b} \frac{b-x}{b-b'} dx \\
+&=& \frac{a'-a}{2} + b'-a' + \frac{b-b'}{2}\\
+&=& \frac{b-a-\alpha}{4} + \alpha + \frac{b-a-\alpha}{4}\\
+&=& \frac{b-a-\alpha}{2}+\alpha\\
+&>& \alpha 
+\end{eqnarray*}
+
+Por lo que ningun $\alpha$ es cota superior.
+
+Ahora, para abiertos $ U $ de la forma $(a,\infty)$ tenemos que $ \overline{S}(\chi_U) = \infty $.
+
+Podemos tomar la sucesión de funciones $f_n (x) = \chi_{U_n}$ donde $U_n = (a,a+n) $. Claramente tenemos que $ f_n(x) < f_{n+1}(x)$ y además todo $f_n(x) < \chi_U $. Luego tenemos que 
+
+$$ \lim_{n \to \infty} f_n \leq \chi_U $$.
+
+Por otro lado tenemos que 
+\begin{eqnarray*}
+\overline{S}(\chi_U)  &\geq& \overline{S}(\lim_{n \to \infty} f_n)\\ &=& \lim_{n \to \infty} \overline{S}(f_n) \\
+&=& \lim_{n \to \infty} n \\
+&=& \infty
+\end{eqnarray*}
+
+Por lo tanto, $\overline{S}(\chi_U) = \infty$.
+
+De manera analoga podemos demostrar que para $U = (-\infty, a)$ y $U = (-\infty,\infty)$, $\overline{S}(\chi_U) = \infty $. Lo que nos permite concluir que para cualquier intervalo abierto $U = (a,b)$ con $a,b \in \mathbb{R} \cup \{-\infty,+\infty\}$, $\overline{S}(\chi_U)=b-a$.
+
+Por ultimo, para generalizar a cualquier abierto $U$ en $\mathbb{R}$ podemos utilizar el teorema (6.59) del libro que dice que existe una única colección contable de intervalos abiertos disyuntos $\mathfrak{U}=\{V_n\}$ tales que $\displaystyle\bigcup_{n \in \mathbb{N}} V_n= U$. Podemos escribir $V_n $ como $(a_n,b_n)$ con $a_n, b_n \in \mathbb{R} \cup \{-\infty,+\infty\}$.
+Luego tenemos que $\displaystyle \chi_U = \sum_{n \in \mathbb{N}} \chi_{V_n} $ y por el colorario (9.14) concluimos que
+$$ \overline{S}(\chi_U) = \overline{S}(\sum_{n \in \mathbb{N}} \chi_{V_n}) = \sum_{n \in \mathbb{N}} \overline{S}(V_N) = \sum_{n \in \mathbb{N}} (b_n-a_n) $$.
+\end{proof}
+\item  Let $E_a : C_{00}(X) \rightarrow \mathbb{C}$ denote the evaluation functional defined by $E_a(f) := f(a).$
+Compute $\overline{E}_a(f)$ for $f \in \mathfrak{M}^+$.
+\begin{proof}
+
+Nota: En el ejercicio (9.9) del libro de donde se tomó este punto se dice que se tome $E_a$ como se define en (9.2.c). Aqui se dice que $E_a$ se define para cualquier espacio no vacío localmente compacto de Hausdorff, por lo cual vamos a usar estos supuestos para realizar el ejercicio. 
+
+Recordemos la definición de $\overline{E}_a(f)$. $$\overline{E_a}(f) = \text{sup}\{E_a(g) = g(a): g \in C_{00}(\mathbb{R}) \wedge g \leq f\} $$
+Vamos a probar que $ \overline{E}_a(f) = f(a) $ demostrando que $f(a)$ es la mínima cota superior del conjunto. Por un lado es facil ver que es cota pues si $ g \leq f $ entonces $ g(a) \leq f(a) $, por lo que $E_a(g)\leq f(a)$. 
+
+
+
+Ahora si tomamos cualquier $\alpha < f(a) $, existe un $\alpha' \in \mathbb{R} $ tal que $\alpha < \alpha' < f(a)$. Para este $\alpha'$ existe un vecindario $U$ de $a$ tal que $f(x)>\alpha' $ para todo punto $ x $ en dicho vecindario. 
+
+Puesto que $X$ es localmente compacto (vease la nota) tenemos que existe un compacto $ K $ y un abierto $V$ tales que $ a \in V \in K $. Entonces tomemos el abierto $ U \cap V $. Por nuestros supuestos tenemos que $X$ es completamente regular por lo que existe una función continua $g: X \rightarrow [0,1] $ que separa el punto $a$ del cerrado $ (U \cap V)^C $, es decir que cumple que $ g(a) = 1 $ y $g(x) = 0$ para todo $x \in (U \cap V)^C $. A partir de esta función podemos construir la función continua $h(x)= \alpha'g(x)$.
+
+Esta función pertenece claramente a $C_{00}(X) $ pues se desvanece fuera de $ K $,  $E_a(h) = \alpha' $ y $ h \leq f $ puesto que para todo $ x \not \in U $ $h(x) = 0$ y para todo $x \in U $, $h(x) \leq \alpha' < f(x) $. Por lo tanto, encontramos una función para la cual $\alpha $ no es cota. Puesto que esto es para cualquier $\alpha < f(a) $ concluimos que el supremo es efectivamente $f(a) $.
+
+\end{proof}
+\end{enumerate}
+\end{enumerate}
+\end{document}

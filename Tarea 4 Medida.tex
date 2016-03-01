@@ -1,0 +1,61 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Tarea 4}
+\newtheorem{theo}{Teorema}
+\newtheorem{lemma}[theo]{Lema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\usepackage{amsfonts}
+\usepackage{psfrag}
+\frenchspacing
+\newcommand{\Sp}{\textrm{Sp}}
+\newcommand{\Hom}{\textrm{Hom}}
+\newcommand{\id}{\textrm{id}}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}[label = (\textbf{\arabic*.})]
+
+\item \begin{enumerate}[label = (\textbf{\roman*.})]
+\item Sea $ \mathfrak{m} $ una medida exterior de Carathéodory sobre $ X $. Si para todo $ A \subseteq X $ existe $ B \in M_\mathfrak{m} $ con $ A \subseteq B $ y $ \mathfrak{m}(A) = \mathfrak{m}(B) $ la medida exterior se llama regular. Muestre que si m es una medida de Carathéodory regular y $ \mathfrak{m}(A) < \infty $, entonces $ A \in M_\mathfrak{m} $ si y sólo si
+$$ \mathfrak{m}(A) + \mathfrak{m}(X \ A) = \mathfrak{m}(X) $$
+
+\item Muestre que aunque se tenga $ \mathfrak{m}(X) < \infty $ en general pueden existir conjuntos $ A \subseteq X $ \textbf{no medibles} según Carathéodory tales que
+
+$$ \mathfrak{m}(A) + \mathfrak{m}(X \ A) = \mathfrak{m}(X) $$
+
+(Sugerencia: Existe un ejemplo con $ |X| = 3 $.)
+\end{enumerate}
+
+\item \begin{enumerate}[label = (\textbf{\roman*.})]
+\item Denote por $ \mathbb{R}_d $ la recta real con la topología discreta. Muestre que el espacio $\mathbb{R}_d \times \mathbb{R}  $ con la topología producto es localmente compacto.
+
+\item Para $ f $ definida sobre $ \mathbb{R}_d \times \mathbb{R} $ y $ x \in \mathbb{R} $ fijo, sea $ f_{[x]} $ la función definida sobre $ \mathbb{R} $ por:
+$$ f_{[x]}(y):=f(x,y). $$
+Muestre que si $ f \in C_{00}(\mathbb{R}_d \times \mathbb{R}) $ se tiene que $ f_{[x]} $ es identicamente cero excepto que para un número finito de elementos $ x \in \mathbb{R} $.
+
+\item Sea $ S $ la integral de Riemann y defina $ I $ sobre $ C_{00}(\mathbb{R}_d \times \mathbb{R}) $ por:
+
+$$ I(f) := \sum_{x \in \mathbb{R}}S(f_{|x|}). $$
+
+Muestre que $ I $ es un funcional lineal positivo sobre $ C_{00}(\mathbb{R}_d \times \mathbb{R}) $.
+
+\item Sea $ \iota(A)  := \overline{\overline{I}}(\chi_A) $, muestre que el conjunto $ A = \{(x,0) : x \in \mathbb{R}\} $ es localmente $ \iota $–nulo, sin embargo no es $ \iota $–nulo.
+\end{enumerate}
+
+\item Sea $ T \subseteq \mathbb{R} $ un conjunto $ \lambda $–medible tal que $ \lambda(T) > 0 $. Muestre que $ T-T $ contiene un intervalo. (Ejercicio 10.43 del libro de texto, viene con sugerencia.)
+\end{enumerate}
+
+\end{document}
