@@ -4,10 +4,11 @@
 \usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+ \numberwithin{equation}{section}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{fullpage}
-\usepackage{latexsym}
+\usepackage{latexsym}	
 \usepackage{enumerate}
 \usepackage{enumitem}
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
@@ -22,15 +23,62 @@
 \newcommand{\Sp}{\textrm{Sp}}
 \newcommand{\Hom}{\textrm{Hom}}
 \newcommand{\id}{\textrm{id}}
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
 
 \begin{document}
 \maketitle
 
+\invisiblesection{1}
 \begin{enumerate}[label = (\textbf{\arabic*.})]
 
 \item \begin{enumerate}[label = (\textbf{\roman*.})]
-\item Sea $ \mathfrak{m} $ una medida exterior de Carathéodory sobre $ X $. Si para todo $ A \subseteq X $ existe $ B \in M_\mathfrak{m} $ con $ A \subseteq B $ y $ \mathfrak{m}(A) = \mathfrak{m}(B) $ la medida exterior se llama regular. Muestre que si m es una medida de Carathéodory regular y $ \mathfrak{m}(A) < \infty $, entonces $ A \in M_\mathfrak{m} $ si y sólo si
-$$ \mathfrak{m}(A) + \mathfrak{m}(X \ A) = \mathfrak{m}(X) $$
+\item Sea $ \mathfrak{m} $ una medida exterior de Carathéodory sobre $ X $. Si para todo $ A \subseteq X $ existe $ B \in M_\mathfrak{m} $ con $ A \subseteq B $ y $ \mathfrak{m}(A) = \mathfrak{m}(B) $ la medida exterior se llama regular. Muestre que si $ \mathfrak{m} $ es una medida de Carathéodory regular y $ \mathfrak{m}(A) < \infty $, entonces $ A \in M_\mathfrak{m} $ si y sólo si
+\begin{equation}
+\mathfrak{m}(A) + \mathfrak{m}(X \backslash A) = \mathfrak{m}(X) \label{eq:med}
+\end{equation}
+
+\begin{proof}
+
+Si suponemos que $ A $ es $\mathfrak{m}-$medible entonces por la definición de medibilidad de Carathéodory tenemos que $ \mathfrak{m}(X) = \mathfrak{m}(A) + \mathfrak{m}(X \backslash A) $. Para la otra implicación tómese $A$ tal que cumple la expresión \eqref{eq:med}. Por  regularidad, tenemos que existe $ B \subseteq X $ tal que 
+\begin{equation}
+ B \in \mathfrak{M}_{\mathfrak{m}}\text{, } A\subseteq B \text{ y  } \mathfrak{m}(A) = \mathfrak{m}(B) \label{eq:reg}
+\end{equation}.
+
+Puesto que $B$ es $\mathfrak{m}$-medible tenemos en particular que
+\begin{equation}
+{\mathfrak{m}}(X) = {\mathfrak{m}}(B) + {\mathfrak{m}}(X\backslash B). \label{eq:medB}
+\end{equation}
+
+Utilizando \eqref{eq:med}, \eqref{eq:reg}, \eqref{eq:medB} concluimos que
+
+\begin{equation}
+{\mathfrak{m}}(X\backslash A) = {\mathfrak{m}}(X) - {\mathfrak{m}}(A) = {\mathfrak{m}}(X) - {\mathfrak{m}}(B) = {\mathfrak{m}}(X\backslash B). \label{eq:dif}
+\end{equation}
+
+Ahora tenemos de nuevo por medibilidad de $B$ que \begin{equation}
+{\mathfrak{m}}(X\backslash A) = {\mathfrak{m}}([X\backslash A] \cap B ) + {\mathfrak{m}}([X\backslash A] \cap [X\backslash B] ) \label{eq:medB2}.
+\end{equation}
+
+Puesto que $A \subseteq B$ tenemos que $X \backslash B \subseteq X \backslash A $ y por lo tanto $[X\backslash A] \cap [X\backslash B] = [X\backslash B]$, es decir que
+\begin{equation}
+{\mathfrak{m}}([X\backslash A] \cap [X\backslash B] ) = {\mathfrak{m}}(X\backslash B ) \label{eq:cap}
+\end{equation}.
+
+Utilizando \eqref{eq:dif} \eqref{eq:medB2} y \eqref{eq:cap} deducimos que \begin{equation}
+{\mathfrak{m}}([X\backslash A] \cap B ) = \mathfrak{m}(X\backslash A) - {\mathfrak{m}}([X\backslash A] \cap [X\backslash B] ) = \mathfrak{m}(X\backslash A) -  \mathfrak{m}(X\backslash B) =  0.
+\end{equation} 
+
+Así, concluimos que el conjunto  $ [X\backslash A] \cap B$ tiene medida 0 y por lo tanto es $\mathfrak{m}$-medible. Ver \cite[Teorema 10.7]{hewitt}. Por ultimo, puesto que podemos escribir $ A $ como intersección de $ \mathfrak{m}- $medibles, valiendonos de la siguiente expresión,
+
+\begin{equation}
+A = B \cap ([X \backslash A] \cap B)^C
+\end{equation}
+
+concluimos que $ A $ es medible.
+\end{proof}
 
 \item Muestre que aunque se tenga $ \mathfrak{m}(X) < \infty $ en general pueden existir conjuntos $ A \subseteq X $ \textbf{no medibles} según Carathéodory tales que
 
@@ -44,7 +92,7 @@ $$ \mathfrak{m}(A) + \mathfrak{m}(X \ A) = \mathfrak{m}(X) $$
 
 \item Para $ f $ definida sobre $ \mathbb{R}_d \times \mathbb{R} $ y $ x \in \mathbb{R} $ fijo, sea $ f_{[x]} $ la función definida sobre $ \mathbb{R} $ por:
 $$ f_{[x]}(y):=f(x,y). $$
-Muestre que si $ f \in C_{00}(\mathbb{R}_d \times \mathbb{R}) $ se tiene que $ f_{[x]} $ es identicamente cero excepto que para un número finito de elementos $ x \in \mathbb{R} $.
+Muestre que si $ f \in C_{00}(\mathbb{R}_d \times \mathbb{R}) $ se tiene que $ f_{[x]} $ es idénticamente cero excepto que para un número finito de elementos $ x \in \mathbb{R} $.
 
 \item Sea $ S $ la integral de Riemann y defina $ I $ sobre $ C_{00}(\mathbb{R}_d \times \mathbb{R}) $ por:
 
@@ -57,5 +105,8 @@ Muestre que $ I $ es un funcional lineal positivo sobre $ C_{00}(\mathbb{R}_d \t
 
 \item Sea $ T \subseteq \mathbb{R} $ un conjunto $ \lambda $–medible tal que $ \lambda(T) > 0 $. Muestre que $ T-T $ contiene un intervalo. (Ejercicio 10.43 del libro de texto, viene con sugerencia.)
 \end{enumerate}
+
+\bibliography{medida}
+\bibliographystyle{alpha}
 
 \end{document}
