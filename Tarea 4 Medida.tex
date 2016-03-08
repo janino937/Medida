@@ -7,14 +7,19 @@
  \numberwithin{equation}{section}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{thmtools}
+\declaretheorem{theorem}
+\declaretheorem[name=Lema, numberwithin=section,refname={lema,lemas},Refname={Lema,Lemas}]{lemma}
 \usepackage{fullpage}
 \usepackage{latexsym}	
 \usepackage{enumerate}
 \usepackage{enumitem}
-\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage{cleveref}
 \title{Tarea 4}
 \newtheorem{theo}{Teorema}
-\newtheorem{lemma}[theo]{Lema}
 \newtheorem*{defi}{Definición}
 \author{Jonathan Andrés Niño Cortés}
 \usepackage{amsfonts}
@@ -82,29 +87,414 @@ concluimos que $ A $ es medible.
 
 \item Muestre que aunque se tenga $ \mathfrak{m}(X) < \infty $ en general pueden existir conjuntos $ A \subseteq X $ \textbf{no medibles} según Carathéodory tales que
 
-$$ \mathfrak{m}(A) + \mathfrak{m}(X \ A) = \mathfrak{m}(X) $$
+$$ \mathfrak{m}(A) + \mathfrak{m}(X \backslash A) = \mathfrak{m}(X) $$
 
 (Sugerencia: Existe un ejemplo con $ |X| = 3 $.)
-\end{enumerate}
+\begin{proof}
+Sea $ X = \{a,b,c\}$, y definamos una medida externa de Carathéodory $\mathfrak{m}: \mathcal{P}(X) \rightarrow \mathbb{R}$ de la siguiente manera:
+\begin{eqnarray*}
+\mathfrak{m}(\emptyset) = 0
+\\ \mathfrak{m}(\{a\}) = \mathfrak{m}(\{b\}) = \mathfrak{m}(\{c\}) = 2
+\\ \mathfrak{m}(\{a,b\}) = \mathfrak{m}(\{a,c\}) = \mathfrak{m}(\{b,c\}) = 3
+\\ \mathfrak{m}(X)=5.
+\end{eqnarray*}
 
+Vemos que se cumple las condiciones de que el vacío es igual a 0 y que la función es positiva. También es facil ver que si $A \subseteq B$ 
+entonces $\mathfrak{m}(A) \leq \mathfrak{m}(B)$.
+
+También tenemos subadtividad, observemos que esto es así para algunos casos especificos.
+\begin{eqnarray*}
+5 = \mathfrak{m}(\{a\})+\mathfrak{m}(\{b,c\}) \geq \mathfrak{m}(X)=5
+\\ 4 = \mathfrak{m}(\{a\}) + \mathfrak{m}(\{b\}) \geq \mathfrak{m}(\{a,b\}) = 3
+\\ 6 = \mathfrak{m}(\{a\}) + \mathfrak{m}(\{b\}) +\mathfrak{m}(\{c\}) \geq \mathfrak{m}(X) = 5
+\\ 6 = \mathfrak{m}(\{a,b\}) + \mathfrak{m}(\{b,c\}) \geq \mathfrak{m}(X) = 5
+\end{eqnarray*}
+
+Los demás casos son triviales o analogos a los mostrados anteriormente, por lo que podemos concluir que se tiene subaditividad.
+
+Ahora nótese que $A = \{a\}$ cumple la propiedad \eqref{eq:med}, pues
+
+\begin{equation}
+2+3 = \mathfrak{m}(\{a\})+\mathfrak{m}(\{b,c\}) = \mathfrak{m}(X)=5 \nonumber
+\end{equation}
+
+Pero $A$ no es medible pues si tomamos $B = \{a,b\} $ tenemos que
+
+\begin{equation}
+3 = \mathfrak{m}(B) \lneq \mathfrak{m}(B \cap A) + \mathfrak{m}(B \cap [X\backslash A]) = \mathfrak{m}(\{a\})+\mathfrak{m}(\{b\}) = 2+2=4. \nonumber
+\end{equation}
+\end{proof}
+\end{enumerate}
+\pagebreak
+\invisiblesection{2}
 \item \begin{enumerate}[label = (\textbf{\roman*.})]
 \item Denote por $ \mathbb{R}_d $ la recta real con la topología discreta. Muestre que el espacio $\mathbb{R}_d \times \mathbb{R}  $ con la topología producto es localmente compacto.
+
+\begin{proof}
+
+Para demostrar esto primero probamos tres lemas sencillos de topología general.
+
+\begin{lemma}\label{le:dlocal}
+Cualquier espacio $X$ con la topología discreta es compacto.
+\end{lemma}
+\begin{proof}
+Tómese cualquier $x \in X $. Si tomamos el singleton $\{x\}$ tenemos que es abierto porque en la topología discreta todo subconjunto de $ X $ es abierto y adicionalmente es compacto porque es finito. Por lo tanto $\{x\}$ es una vecindad compacta de $X$. Puesto que $x$ es arbitrario concluimos que $ X $ es localmente compacto. 
+\end{proof}
+
+\begin{lemma} \label{le:rlocal}
+El espacio $  \mathbb{R} $ es localmente compacto.
+\end{lemma}
+\begin{proof}
+Tómese cualquier $x \in \mathbb{R} $. Sabemos que existe algún intervalo abierto $ (a,b) $ tal que $ x \in (a,b) $ y puesto que tenemos que $ [a,b] $ es compacto concluimos que $ [a,b] $ es una vecindad compacta de $ x $. Ver \cite[$ \mathsection $ 29, Ejemplo 1]{munkres}.
+\end{proof}
+
+\begin{lemma} \label{le:plocal}
+Sean $X $ y $ Y$ dos espacio topológicos localmente compactos. Entonces tenemos que el espacio $ X \times Y $ con la topología producto es localmente compacto.
+\end{lemma}
+\begin{proof}
+Tómese un punto cualquiera $ (x,y) $ en el producto. Puesto que $X$ y $Y$ son localmente compactos tenemos que existen conjuntos abiertos $U, V$ y conjuntos compactos $J, K $ tales que $ x \in U \subseteq J \subseteq X $ y $ y \in V \subseteq K \subseteq Y $. Puesto que el producto de compactos es compacto (ver \cite[Teorema 26.7]{munkres}) y el producto de abiertos es abierto (ver \cite[$ \mathsection $ 15, La topología producto de $X \times Y$]{munkres}), concluimos que
+\begin{equation*}
+(x,y) \in U \times V \subseteq J \times K
+\end{equation*}
+por lo que concluimos que el espacio es localmente compacto. \end{proof}
+
+Por el \autoref{le:dlocal} y el \autoref{le:rlocal} tenemos que $ \mathbb{R}_d $ y $ \mathbb{R} $ son localmente compactos. Finalmente por el \autoref{le:plocal} concluimos que el producto entre ellos $ \mathbb{R}_d \times \mathbb{R} $ es localmente compacto.
+\end{proof}
 
 \item Para $ f $ definida sobre $ \mathbb{R}_d \times \mathbb{R} $ y $ x \in \mathbb{R} $ fijo, sea $ f_{[x]} $ la función definida sobre $ \mathbb{R} $ por:
 $$ f_{[x]}(y):=f(x,y). $$
 Muestre que si $ f \in C_{00}(\mathbb{R}_d \times \mathbb{R}) $ se tiene que $ f_{[x]} $ es idénticamente cero excepto que para un número finito de elementos $ x \in \mathbb{R} $.
+\begin{proof}
+Vamos a demostrar otro lema sencillo de topología
+\begin{lemma}\label{le:dcompacto}
+Sea $ X $ un espacio con la topología discreta. Tenemos que $K$ es compacto si y sólo si $ K $ tiene cardinalidad finita.
+\end{lemma}
+\begin{proof}
+Si $K$ es finito entonces para cualquier cobertura abierta de $K$ puedo seleccionar por cada elemento un conjunto de la cobertura que lo contenga. La colección de estos conjuntos sería una subcobertura finita que contiene a $K$ y por lo tanto $K $ es compacto.
 
+Para la otra implicación tómese un conjunto $A \subseteq X $ de cardinalidad infinita. La colección de singletons de los elementos de $ A $ es una cobertura abierta de $A$ que no tiene subcobertura finita pues si retiramos un solo singleton de la colección dejaríamos de cubrir el elemento correspondiente. Por lo tanto la condición que $K $ sea finito es necesaria para que $K$ sea compacto.
+\end{proof}
+
+Tómese cualquier función $f$ con soporte compacto y sea $K$ el conjunto compacto correspondiente. Por un teorema de topología (ver \cite[Teorema 26.5]{munkres}) tenemos que la imagen de $K$ bajo una función continua es compacta. Por lo tanto, si $ \pi_1$ y $\pi_2 $ son las proyecciones de $\mathbb{R}_d \times \mathbb{R} $ a $ \mathbb{R}_d $ y $ \mathbb{R} $ respectivamente tenemos que $ \pi_1(K) $ y $ \pi_2(K) $ son compactos y por lo tanto $ \pi_1(K) \times \pi_2(K) $ (ver nuevamente \cite[Teorema 26.7]{munkres}). Adicionalmente por el \textbf{\autoref{le:dcompacto}} sabemos que $ \pi_1(K)$ es finito. Tenemos que $ K \subseteq \pi_1(K) \times \pi_2(K)$. Luego como $f$ es de soporte compacto tenemos que para cualquier $x \not \in \pi_1(K)$, $f_{[x]}(y)= f(x,y) = 0$ para cualquier $y \in \mathbb{R}$. Así que probamos que $ f_{[x]} $ es idénticamente 0 para cofinitos $x \in \mathbb{R}$.
+\end{proof}
 \item Sea $ S $ la integral de Riemann y defina $ I $ sobre $ C_{00}(\mathbb{R}_d \times \mathbb{R}) $ por:
 
-$$ I(f) := \sum_{x \in \mathbb{R}}S(f_{|x|}). $$
-
+$$ I(f) := \sum_{x \in \mathbb{R}}S(f_{[x]}). $$
+0
 Muestre que $ I $ es un funcional lineal positivo sobre $ C_{00}(\mathbb{R}_d \times \mathbb{R}) $.
 
+\begin{proof}
+Tenemos que $S $ es un funcional lineal, por lo que tenemos que sí $f$ es idénticamente 0 entonces $S(f)=0 $ y además $ S(f+g)= S(f)+S(g)$. Además por el punto anterior tenemos que $f_{[x]}$ es 0 en todos excepto finitos $x \in \mathbb{R}$. Sean $ \{x_1, x_2, \cdots, x_n\} $ los elementos donde $f_{[x]} \not = 0$. Tenemos entonces que
+
+\begin{equation*}
+	I(f) = \sum_{x \in \mathbb{R}}S(f_{[x]} ) = \sum_{i=1 }^n S(f_{[x_i]}) = S(\sum_{i=1 }^n f_{[x_i]}).
+\end{equation*}
+
+Es fácil ver que para $ f,g \in C_{00}(\mathbb{R}_d \times \mathbb{R})$, $\alpha, \beta \in \mathbb{C} $ 
+$$ (\alpha f+\beta g)_{[x]} = \alpha f_{[x]} + \beta g_{[x]}. $$
+
+Luego
+\begin{eqnarray*} 
+I(\alpha f+\beta g) &=& S(\sum_{i=1}^n \alpha f_{[x]} + \beta g_{[x]}) = S(\alpha\sum_{i=1}^n f_{[x]} + \beta \sum_{i=1}^n g_{[x]})
+\\ &=& \alpha S(\sum_{i=1}^n f_{[x]}) + \beta S(\sum_{i=1}^n g_{[x]}) = \alpha I(f)+\beta I(g)
+\end{eqnarray*}
+\end{proof} por lo cual concluimos que $ I $ es un funcional lineal.
+
 \item Sea $ \iota(A)  := \overline{\overline{I}}(\chi_A) $, muestre que el conjunto $ A = \{(x,0) : x \in \mathbb{R}\} $ es localmente $ \iota $–nulo, sin embargo no es $ \iota $–nulo.
+
+\begin{proof}
+Considere los subespacios  de la forma $(\{a\} \times \mathbb{R})$ con $ a \in \mathbb{{R}}_d $. Por un lado tenemos que este subespacio es abierto (de hecho también es un subespacio cerrado) por lo que todo conjunto abierto en el subespacio también es abierto en $\mathbb{R}_d \times \mathbb{R} $.
+ Por otra parte este espacio es isomorfo a $\mathbb{R}$ tomando como isomorfismo la proyección sobre $ \mathbb{R} $.
+ 
+ Por ultimo, notese que las funciones $f$ con soporte compacto definidas en este conjunto también son de soporte compacto en todo el espacio si extendemos la función a una función $f'$ que valga 0 en el complemento del subespacio. Esto se da puesto que un compacto en un subespacio también es compacto en el espacio originalm por lo tanto el mismo $K$ se puede usar satisfactoriamente para subespacio y espacio.  También se preserva la continuidad por el lema del pegamiento \cite[Teorema 18.3]{munkres}.
+ 
+ Entonces es fácil ver que para dicho $f'$
+ 
+ $$ I(f') = I(f) = S(f) $$
+ 
+Así que en este subespacio el funcional $ I $ coincide con el funcional $S$ que origina la medida de Lebesgue. Puesto que tenemos la misma medida sobre un espacio que es isomorfo a $\mathbb{R}$ concluimos que para cualquier función $f \in \mathfrak{F}^+$
+
+$$ \overline{\overline{I}}(f') = \overline{\overline{S}}(f) $$  
+
+En particular tenemos que para cualquier conjunto $B \subseteq \mathbb{R}_d \times \mathbb{R} $ y cualquier $a \in \mathbb{R}_d$, 
+$$\iota(B \cap (\{a\}) \times \mathbb{R})) = \lambda(\pi_2(B \cap (\{a\}) \times \mathbb{R}))). $$
+
+También tenemos por $\sigma-$aditividad que si un conjunto $B$ es tal que $\pi_1(B)$ es a lo sumo enumerable entonces
+
+ \begin{equation}
+ \iota(B) =  \sum_{i=0}^\infty \iota(B \cap (\{a_n\}) \times \mathbb{R})) = \sum_{i=0}^\infty \lambda(\pi_2(B \cap (\{a_n\}) \times \mathbb{R}))), \label{eq:sumcontable}
+ \end{equation}
+donde $\{a_n\}$ es una enumeración de $\pi_1(B)$.
+%Este homeomorfismo también define una biyección $\phi $ entre el espacio de funciones de $(\{a\} \times \mathbb{R}) \to \mathbb{R} $ y el de $\mathbb{R} \to \mathbb{R} $. Explícitamente esta biyección es $ \phi(f)= f_{[a]} $.
+%
+%Gracias a este homeomorfismo tenemos que todas las propiedades topológicas de los espacios se preservan. Esto nos permite concluir fácilmente que si $f$ es de soporte compacto entonces $\phi(f)$ también lo es. De igual manera si $f$ es semicontinua también lo es $\phi(f)$ y si $f$ es real positiva también lo es $\phi(f)$. Por ultimo obsérvese que por nuestra definición de $I$ si $ f \in C_{00}(\mathbb{R}_d \times \mathbb{R}) $ entonces $I(f) = S(f_{a})$. Todo esto nos permite concluir que para funciones $f$ sobre $(\{a\} \times \mathbb{R}) \to \mathbb{R} $ tenemos que $\overline{\overline{I}}(f)= \overline{\overline{S}}(f_{[a]})$.
+%
+%Podemos extender una función $f$ definida en $(\{a\} \times \mathbb{R}) $ a $f'$ definida en todo el espacio $(\mathbb{R}_d \times \mathbb{R})$, haciendo que la función tome el valor 0 fuera de los puntos donde esta originalmente definida. Puesto que $(\{a\} \times \mathbb{R}) $ es un subespacio que es abierto y cerrado, es fácil ver que esta extensión preserva las propiedades de continuidad, semicontinuidad, soporte compacto, etc, de las funciones. Por otra parte se sigue de la definición de $I$ que $\overline{\overline{I}}(f') = \overline{\overline{I}}(f)$.
+%
+%Si $f(x,y) $ es una función tal que $f_{[x]} = 0 $ para todos excepto finitos elementos $ x \in \mathbb{R} $ entonces tenemos
+%
+%\begin{equation}
+%f = \sum_{a \in \mathbb{R}} f'_{a} 
+%\end{equation}
+%
+%donde
+%
+%\begin{equation}
+%f'_{a}(x,y) = 
+%\left\{
+%	\begin{array}{ll}
+%		f_{[a]}(y)  &  \text{si } x = a \\
+%		0 & \text{de lo contrario} 
+%	\end{array}
+%\right. \label{eq:compf}
+%\end{equation}
+%
+%En particular si $f$ es medible entonces por aditividad tenemos que
+%
+%$$ \overline{\overline{I}}(f) =  \sum_{a \in \mathbb{R}} \overline{\overline{S}}(f_{[a]})  $$
+%
+%Entre el conjunto de funciones medibles sabemos que están contenidas las funciones características de los conjuntos boreleanos. Con esto es fácil demostrar que el conjunto $A $ es localmente $\iota$-nulo, pues por los literales anteriores tenemos que
+
+Con esto podemos demostrar que $A$ es localmete $ \iota $-nulo, pues para cualquier $F$ compacto se tiene que
+
+$$ \iota(A \cap F) = \sum_{x: (x,0) \in F } \overline{\overline{I}}((\chi_A)_{[x]}) = \sum_{x: (x,0) \in F } \overline{\overline{S}}(\chi_{\{0\}}) = \sum_{x: (x,0) \in F } \lambda(\{0\}) =  0 $$ 
+Observese que las sumatorias anteriores son finitas, pues solo finitos $ x $ cumplen que $(x,0) \in F $. Esto se debe a que estos puntos están contenidos en $\pi_1(F) \subseteq \mathbb{R}_d $ que es compacto y por lo tanto finito por el \autoref{le:dcompacto}. Por lo tanto las sumatorias estan bien definidas.
+
+Ahora vamos a demostrar que $\iota(A) = \infty $.
+
+Recuérdese que 
+\begin{equation}
+\iota(A) = \inf\{\iota(U): U \text{ es abierto y } A \subseteq U \}. \label{eq:abiertos}
+\end{equation}
+Ver \cite[Teorema 9.24]{hewitt}. Por lo tanto, sea $U$ un abierto cualquiera tal que $A \subseteq U $.
+
+Ahora definamos $ U_x $ como $ (U \cap (\{x\} \times \mathbb{R}))$. Es fácil ver que cada $U_x$ es un abierto y adicionalmente tenemos que 
+$$\iota(U_x) = \lambda({\pi_2(U_x)}) > 0, $$ pues la proyección envía abiertos en abiertos y para la medida de Lebesgue tenemos que la medida de cualquier abierto siempre es mayor a cero (esto es fácil de ver pues cualquier abierto contiene algún intervalo $ (a,b) $ y por lo tanto su medida es mayor a $b-a$).
+
+Pero esto no basta para demostrar que la medida de $U$ es infinito. Para esto vamos a probar que existe un $\alpha > 0 $ para el cual existen infinitos $U_x $ tales que $\iota(U)\geq\alpha$
+
+Supongase por contradicción que este no es el caso. Es decir, que para cualquier $\alpha $ existen a lo sumo finitos $x \in \mathbb{R}_d$ tales que $\iota(U_x) \geq \alpha $. Entonces considere la sucesión de conjuntos $B_n = \{x \in \mathbb{R}_d: \iota(U_x) \geq 1/n  \}$. Tenemos que 
+$$ \bigcup_{i=1}^\infty B_n = \mathbb{R}_d $$ pues para todo $ x \in \mathbb{R}$, existe un $n$ tal que $ \iota(U_x)) \geq 1/n $. Llegamos a una contradicción pues la unión de los $ B_n $ es a lo sumo enumerable mientras que $ \mathbb{R}_d $ es no enumerable. (De hecho si suponemos que hay a lo sumo enumerables $x$ tales que $U_x \geq \alpha $ también llegamos a la misma contradicción, por lo cual hay no enumerables $x$'s mayores a un $\alpha$).
+
+Finalmente para el $\alpha$ mencionado anteriormente tomamos una subcolección infinita enumerable $\{U_{x_n}\}$ tal que $\iota(U_{x_n})\geq \alpha$. Es claro que esta subcolección es disyunta dos a dos. Definimos la sucesión creciente de conjuntos $\{V_n\}$, como 
+$$V_n = \bigcup_{i=1}^n U_{x_n}\text{; y tenemos por $\sigma$-aditivdad que }\iota(V_n) = \iota(\bigcup_{i=1}^n U_{x_n}) = \sum_{i=0}^n \iota(U_{x_n}) \geq n\alpha.$$
+
+
+
+Finalmente es claro que $V_1 \subseteq V_2 \subseteq \cdots \subseteq V_n \subseteq \cdots \subseteq U $. Luego tenemos por el teorema 10.13 \cite{hewitt} que
+$$ \iota(U) \geq \iota(\bigcup_{i=1}^\infty V_n) = \lim_{n \to \infty} \iota(V_n) \geq \lim_{n \to \infty} \alpha n = \infty. $$ Concluimos finalmente que $\iota(U)= \infty $, y puesto que esto se hizo para $U$ arbitrario que contuviera a $A$ concluimos por \eqref{eq:abiertos} que $\iota(A)= \infty$ y que por lo tanto no es $\iota$-nulo.
+
+%\begin{lemma}
+%Sea $ f \in C_{00}(\mathbb{R}_d \times \mathbb{R}) $ y $f'_a $ definido a partir de $ f $ como en \eqref{eq:compf}. Entonces tenemos que $f'_a \in C_{00}(\mathbb{R}_d \times \mathbb{R})$ y
+%$$ I(f'_a) = S(f_{[a]})  $$
+%\end{lemma}
+%\begin{proof}
+%
+%
+%Podemos escribir $f'_a $ de manera equivalente como
+%
+%\begin{equation}
+%f'_{a}(x,y) = 
+%\left\{
+%	\begin{array}{ll}
+%		f(x,y) & x \in \{a\} \times \mathbb{R} \\
+%		0 & x \in  (\mathbb{R}_d \backslash\{a\}) \times \mathbb{R}
+%	\end{array}
+%\right. \label{eq:compf2}
+%\end{equation}
+%
+%Es claro que $f$ y la función constante 0 son continuas y adicionalmente $x \in \{a\} \times \mathbb{R}$ y su complemento son conjuntos cerrados disyuntos. Luego, por el lema del pegamiento (ver \cite[Teorema 18.3]{munkres}) podemos concluir que $f'(a)$ es continua. 
+%
+%Sea a $ A = \{(x,y) \in \mathbb{R} f(x,y)>0 \}$, por nuestra hipótesis tenemos que existe un compacto $ K $ tal que $A \subseteq K $. Sea $A' = \{f'_a(x,y) \in \mathbb{R} f(x)>0 \}$. Tenemos que $A' = A \cap (\{x\} \times \mathbb{R}) \subseteq A \subseteq K $, por lo que concluimos que $f'_a $ es de soporte compacto.
+%
+%Finalmente es fácil ver por la definición de $I$ que 
+%$$I(f'_a) = S(f_{[a]}) $$
+%\end{proof}
+%
+%\begin{lemma}
+%Sea $ f \in \mathfrak{M}^+ $ y $f'_a $ definido a partir de $ f $ como en \eqref{eq:compf}. Entonces tenemos que $f'_a \in \mathfrak{M}^+$ y
+%$$ \overline{I}(f'_a) = \overline{S}(f_{[a]})  $$
+%\end{lemma}
+%\begin{proof}
+%
+%Considere los conjuntos de la forma $(f'_a)^{-1}(x, \infty) $. Si $x<0 $ entonces $(f'_a)^{-1}(x, \infty) = \mathbb{R_d} \times \mathbb{R} $ que es abierto. Si  $x \geq 0$ entonces tenemos que $(f'_a)^{-1}(x, \infty) = f^{-1}(x, \infty) \cap (\{x\} \times \mathbb{R}) $. Ambos conjuntos son abiertos, el primero debido a que $f$ es semicontinua y el segundo porque es el producto de dos abiertos. Por lo tanto, concluimos que $f'_a$ es semicontinua.
+%
+%Ahora observese que hay una correspondencia biyectiva entre el conjunto de funciones con soporte compacto menores a $f_{[a]}$ y el conjunto de funciones de soporte compacto menores a $ f'_{a} $.
+%
+%\begin{eqnarray*}
+%\overline{I}(f'_{a})&=& \sup\{I(g): g \leq f'_{a} g \in C _{0}(\mathbb{R}_d \times \mathbb{R}) \} = \sup\{I(g): g \leq f'_{a} g \in C _{00}(\mathbb{R}_d \times \mathbb{R}) \}\\
+% &=& \sup\{S(g): g \leq f_{[a]} g \in C _{00}(\mathbb{R}) \} = \overline{S}(f_{[a]}). 
+%\end{eqnarray*} 
+%\end{proof}
+
+\end{proof}
 \end{enumerate}
+
+\invisiblesection{3}
+\pagebreak
 
 \item Sea $ T \subseteq \mathbb{R} $ un conjunto $ \lambda $–medible tal que $ \lambda(T) > 0 $. Muestre que $ T-T $ contiene un intervalo. (Ejercicio 10.43 del libro de texto, viene con sugerencia.)
 \end{enumerate}
+
+\begin{proof}
+Siguiendo los hints propuestos en \cite[Ejercicio 10.43]{hewitt} vamos a demostrar tres lemas intermedios para demostrar el ejercicio.
+
+\begin{lemma}\label{le:int_abierto}
+Si $ U = (a,b) $ con $ a, b \in \mathbb{R} $ y $V$ un abierto cualquiera se tiene que la función
+	
+	\begin{equation*}
+		x \mapsto \lambda((x+U) \cap V ) \nonumber
+	\end{equation*} es continua. 
+\end{lemma}
+\begin{proof}
+    	Para un $ \epsilon > 0 $ tómese $ \delta = \min(\epsilon,b-a)/2$. Ahora tómese $ x, x' $ tales que $ |x-x'|< \delta $ y asumamos sin perdida de generalidad que $ x' \leq x $ (El caso en que $x \leq x'$ es análogo). Entonces tenemos que 
+      \begin{equation*}
+      	x +a < \delta + x' + a < b-a +x' + a = b+x' \nonumber
+      \end{equation*}
+ Y por lo tanto tengo la siguiente cadena de desigualdades.
+      \begin{equation*}
+      	x'+a \leq x+a < x'+b \leq x+b. \nonumber
+      \end{equation*}
+Esto me permite partir los conjuntos $x+U$ y $x'+U$ como unión disyunta de dos conjuntos $\lambda$-medibles de la siguiente manera:
+\begin{equation*}
+      	x+U = (x+a,x+b) = (x+a,x'+b) \cup [x'+b, x+b) \nonumber
+      \end{equation*}
+      \begin{equation*}
+      	x'+U = (x'+a,x'+b) = (x'+a,x+a] \cup (x+a, x'+b) \nonumber
+      \end{equation*}
+ Entonces por propiedades de la medida tenemos que
+% |\lambda((x+U) \cap V)- \lambda((x'+U) \cap V)|
+ \begin{eqnarray*}
+ & & |\lambda((x+U) \cap V)- \lambda((x'+U) \cap V)|
+ \\ &=& |\lambda((x+a,x'+b) \cup [x'+b, x+b) \cap V)- \lambda((x'+a,x+a] \cup (x+a, x'+b) \cap V)|
+ \\ &=& |\lambda([x+a, x'+b) \cap V) +\lambda([x'+b, x+b) \cap V)- \lambda((x'+a,x+a] \cap V)
+ \\& &-\lambda((x+a, x'+b) \cap V)|
+ \\ &=& |\lambda([x'+b, x+b) \cap V)- \lambda((x'+a,x+a] \cap V)|
+ \end{eqnarray*}
+ Pero por desigualdad triangular
+ \begin{eqnarray*}
+ & &|\lambda([x'+b, x+b) \cap V)- \lambda((x'+a,x+a] \cap V)|
+ \\&\leq & \lambda([x'+b, x+b) \cap V) + \lambda((x'+a,x+a] \cap V)
+ \end{eqnarray*}
+ Puesto que $[x'+b, x+b) \cap V \subseteq [x'+b, x+b)$ y $(x'+a,x+a] \cap V \subseteq (x'+a,x+a]$ tenemos que 
+  \begin{eqnarray*}
+ & &\lambda([x'+b, x+b) \cap V) + \lambda((x'+a,x+a] \cap V)
+ \\&\leq & \lambda([x'+b, x+b)) + \lambda((x'+a,x+a])
+ \\&= & (x+b-(x'+b)) + (x+a-(x'+a))
+ \\& = & 2(x-x')
+ \\ & < & 2\delta
+ \\ & \leq & \epsilon
+ \end{eqnarray*}
+Concluimos que para este caso la función es continua.\end{proof}
+
+Ahora generalizamos este enunciado un poco más en el siguiente lema.
+
+\begin{lemma} \label{le:abierto}
+Para $ U, V \subseteq \mathbb{R}$ dos abiertos cualquiera con $ \lambda(U) < \infty $ se tiene que la función
+\begin{equation*}
+	x \mapsto \lambda((x+U) \cap V ) \nonumber
+\end{equation*} es continua. 
+\end{lemma}
+
+\begin{proof}
+Tenemos por \cite[Teorema 6.59]{hewitt} que $U = \bigcup_{n = 1}^\infty A_n $ con $\{A_n\}$ una colección enumerable de intervalos abiertos disyuntos y por $\sigma$-aditividad tenemos que
+
+\begin{equation}
+\lambda((x+U) \cap V ) = \sum_{n=0}^\infty \lambda((x+A_n) \cap V ) \label{eq:sum}
+\end{equation}
+
+Si tomamos $M_n = \lambda(A_n)$ vemos por propiedades de la medida de Lebesgue que 
+
+\begin{equation*}
+ \lambda((x+A_n) \cap V ) \leq M_n \nonumber
+\end{equation*}
+
+Por otro lado tenemos que
+
+\begin{equation*}
+\sum_{n=0}^\infty  M_n = \lambda(U) < \infty \nonumber
+\end{equation*}
+ 
+Por lo tanto, podemos concluir por el test $M$ de Weierstrass \cite[Teorema 7.10]{rudin} que \eqref{eq:sum} converge uniformente y por lo demostrado anteriormente en el \textbf{\autoref{le:int_abierto}} tenemos que $ \lambda((x+A_n) \cap V ) $ es continua para todo $n$. Esto a su vez implica que cualquier suma parcial es continua. Concluimos por lo tanto que \eqref{eq:sum} es continua \cite[Teorema 7.12]{rudin}.\end{proof}
+A continuación pasamos incluso a un caso más general que el anterior.
+
+\begin{lemma}
+Para $ A, B \subseteq \mathbb{R}$ dos conjuntos $ \lambda  $-medibles con $ \lambda(A), \lambda(B)  < \infty $ se tiene que la función
+\begin{equation}
+	x \mapsto \lambda((x+A) \cap B ) \label{eq:fmed}
+\end{equation} es continua. \label{le:medible}
+\end{lemma}
+
+\begin{proof}
+Por un teorema del libro \cite[Teorema 9.24]{hewitt} podemos encontrar dos conjuntos abiertos $U, V$ tales que $ A \subseteq U $, $\lambda(U) \leq \lambda(A)+\epsilon/6$, $ B \subseteq V $ y $\lambda(V) \leq \lambda(B)+\epsilon/6$.
+
+Tenemos que $ U = A \cup (U \cap A^c)$ y $ V = B \cup (V \cap B^c)$, por lo que tenemos que
+\begin{eqnarray*}
+\lambda((x+U) \cap V) &=& \lambda((x+A) \cap V) + \lambda((x+((A^c \cap U))) \cap V)
+\\&=& \lambda((x+A) \cap B) + \lambda((x+A) \cap (B^c \cap V)) + \lambda((x+((A^c \cap U))) \cap V)
+\end{eqnarray*}
+
+Y por lo tanto podemos demostrar la siguiente desigualdad
+\begin{equation}
+|\lambda((x+U) \cap V) - \lambda((x+A) \cap B)| \leq \lambda(U \cap A^C) + \lambda(V \cap B^C) \leq \epsilon/3 \label{eq:des}
+\end{equation}
+pues
+\begin{eqnarray*}
+|\lambda((x+U) \cap V) - \lambda((x+A) \cap B)| & = & |\lambda((x+A) \cap (B^c \cap V)) + \lambda((x+(A^c \cap U)) \cap V)|
+\\&\leq & \lambda((x+A) \cap (B^c \cap V)) + \lambda((x+(A^c \cap U)) \cap V)
+\\&\leq & \lambda(B^c \cap V) + \lambda(x+(A^c \cap U))
+\\&= & \lambda(B^c \cap V) + \lambda(A^c \cap U)
+\\&= & \lambda(V) - \lambda(B)  + \lambda(U) - \lambda(A).
+\\& \leq & \epsilon/6  + \epsilon/6 = \epsilon/3.
+\end{eqnarray*}
+
+Por otra parte por el \textbf{\autoref{le:abierto}} sabemos que existe $\delta $ tal que si $|x-x'| < \delta $ entonces 
+
+\begin{equation}
+|\lambda((x+U) \cap V)- \lambda((x'+U) \cap V)| \leq \epsilon/3 \label{eq:contAb} 
+\end{equation}
+
+Ahora podemos usar las desigualdades \eqref{eq:des} y \eqref{eq:contAb} para demostrar que si $|x-x'|<\delta $ entonces 
+
+\begin{equation*}
+|\lambda((x+A) \cap B)- \lambda((x'+A) \cap B)| \leq \epsilon
+\end{equation*}
+
+En efecto tenemos que
+\begin{eqnarray*}
+& &  |\lambda((x+A) \cap B)- \lambda((x'+A) \cap B)|
+\\&\leq&  |\lambda((x+A) \cap B)-\lambda((x+U) \cap V)|+|\lambda((x+U) \cap V)- \lambda((x'+A) \cap B)|
+\\&\leq&  |\lambda((x+A) \cap B)-\lambda((x+U) \cap V)|+|\lambda((x+U) \cap V)- \lambda((x'+U) \cap V)|
+\\& & + |\lambda((x'+U) \cap V) - \lambda((x'+A) \cap B)|
+\\ & \leq & \epsilon/3 + \epsilon/3 + \epsilon/3 = \epsilon.
+\end{eqnarray*}
+
+El primer y ultimo valor absoluto se reduce por \eqref{eq:des} y el valor absoluto del medio por \eqref{eq:contAb}.
+
+Por lo tanto, \eqref{eq:fmed} es continua.\end{proof}
+
+Finalmente podemos demostrar el ejercicio. Primero supongase que $ \lambda(T) < \infty $. Podemos usar el lema demostrado anteriormente para concluir que la función $ f(x) = \lambda((x+T)\cap T)$ es continua. Adicionalmente en $x = 0 $, $f(x) = \lambda(T)$. Luego por continuidad en este punto existe un $\delta$ tal que si $ |x| < \delta $ entonces $|f(x)-\lambda(T)| < \lambda(T)/2 $ de donde concluimos que $f(x) > 0 $ pues
+\begin{eqnarray*}
+|f(x)-\lambda(T)| &<& \lambda(T)/2
+\\-\lambda(T)/2 &<& f(x)-\lambda(T)
+\\ 0 &<& f(x) -\lambda(T)/2 < f(x)
+\end{eqnarray*}
+
+Esto implica claramente que para $x \in (-\delta,\delta)$,  $(x+T)\cap T \not = \emptyset $. Es decir que existe un $t $ tal que $t \in T $ y $t = t'+x $ para algun $t' \in T $. Así que podemos escribir $x = t-t'$, es decir que $ x \in T - T $.
+Por lo tanto la bola de radio $\delta $ alrededor de 0 esta contenida en $T - T$ y en particular si tomamos $0<\alpha<\delta$ tenemos que $[-\alpha,\alpha] \subseteq T-T$.
+
+Para el caso en que $T$ tiene medida infinita seleccionamos un conjunto medible $T'$ tal que $T' \subseteq T$ y $ 0<\lambda(T) < \infty $.
+
+Para obtenerlo tómese la secuencia de conjuntos $\{A_n\}$ donde $A_n = [-n,n] \cap T $. Claramente la secuencia es creciente y converge a $ T $ y para cualquier $n$ tenemos que $\lambda(A_n) \leq 2n < \infty $. Por un teorema del libro \cite[Teorema 10.13]{hewitt} tenemos que
+
+\begin{equation}
+\lim_{n \to \infty}\lambda(A_n) = \lambda(T) = \infty 
+\end{equation}
+
+Por lo que debe existir por lo menos algún $n$ tal que $\lambda(A_n)>0$.
+
+Ahora simplemente tomamos $T' = A_n$, aplicamos lo demostrado anteriormente y puesto que por definición tenemos que $T'-T' \subseteq T-T$ concluimos que existe $\alpha > 0$ tal que $[-\alpha, \alpha] \subseteq T'-T' \subseteq T-T $.
+\end{proof}
 
 \bibliography{medida}
 \bibliographystyle{alpha}
