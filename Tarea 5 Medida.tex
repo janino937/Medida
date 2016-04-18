@@ -1,0 +1,254 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+
+\usepackage{amsmath}
+ \numberwithin{equation}{section}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\declaretheorem{theorem}
+\declaretheorem[name=Lema, numberwithin=section,refname={lema,lemas},Refname={Lema,Lemas}]{lemma}
+\usepackage{fullpage}
+\usepackage{latexsym}	
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage{cleveref}
+\title{Tarea 5}
+\newtheorem{theo}{Teorema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\usepackage{amsfonts}
+\usepackage{psfrag}
+\frenchspacing
+\newcommand{\Sp}{\textrm{Sp}}
+\newcommand{\Hom}{\textrm{Hom}}
+\newcommand{\id}{\textrm{id}}
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\begin{document}
+\maketitle
+
+\invisiblesection{1}
+\begin{enumerate}[label = (\textbf{\arabic*.})]
+\item Sea $ X $ un espacio topológico, se recuerda que un conjunto $ F_\sigma $ es una unión enumerable de
+conjuntos cerrados y un $ G_\delta $ es una intersección enumerable de conjuntos abiertos.
+\begin{enumerate}[label = (\textbf{\roman*.})]
+\item  Determine si $ \mathbb{Q} $ es un $ F_\sigma $ o un $ G_\delta $ en $ \mathbb{R} $.
+
+\begin{proof}
+$ \mathbb{Q} $ es un $ F_\sigma $ pues es enumerable y por lo tanto puede verse como la unión enumerable de singletons que son cerrados en $ \mathbb{R} $.
+
+$\mathbb{Q} $ no es un $G_\delta$. Para demostrar esto necesitamos usar parte del teorema de categorías de Baire.
+
+Un espacio de Baire es un espacio topológico que tiene la siguiente propiedad:
+
+Para cada colección enumerable de conjuntos abiertos densos $ \{U_n\}_{n=1}^\infty $, su intersección $ \bigcap_{n=1}^\infty U_n $ es densa.
+
+\begin{lemma} \label{le:Baire}
+$ \mathbb{R} $ es un espacio de Baire. 
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+Ahora para demostrar que $\mathbb{Q} $ no es un $G_\delta$ supongase lo contrario. Entonces existe una colección de abiertos $ U_n $ tal que $ \bigcap_{n=1}^\infty U_n = \mathbb{Q} $. Puesto que cada $ U_n $ contiene a $ \mathbb{Q} $ podemos concluir que $U_n $ es denso.
+
+Denotese por $ \mathbb{I} $ al conjunto de los irracionales.  Puesto que $\mathbb{Q} $ es un $ F_\sigma $ tenemos que su complemento $\mathbb{I}$ es un $G_\delta$ y es igual a la intersección de la colección $\{\mathbb{R}\backslash \{q\}|q \in \mathbb{Q} \} $. Esta colección también resulta ser una colección enumerable de abiertos densos. 
+
+Sin embargo si tomo la intersección de las dos colecciones su resultado es vacío y esto contradice el hecho que $ \mathbb{R} $ es un espacio de Baire.
+
+\end{proof}
+
+\item Escriba un conjunto $ A \in \mathcal{B}(\mathbb{R}) $ que no es ni un $ F_\sigma $ ni un $ G_\delta $ (demuestre por qué).
+\begin{proof}
+Considere el conjunto $[(-1,1) \cap \mathbb{Q}] \cup [(-1,1)^C \cap \mathbb{I}]$. Claramente este conjunto se encuentra en la $ \sigma $-algebra de Borel de $\mathbb{R}$ pues se obtiene a partir de la intersección, unión y complementos de abiertos, cerrados, $G_\delta$ y $F_\sigma $ todos en la $ \sigma $- álgebra de Borel.
+
+Pero adicionalmente este conjunto cumple la propiedad de no ser un $G_\delta$ ni un $F_\sigma$. 
+\end{proof}
+
+\item Muestre que si $ A \in \mathcal{B}(\mathbb{R}) $ entonces $ A $ difiere de ser $ F\sigma $ o $ G\delta $ por un conjunto $ \lambda $–nulo. ($ \lambda $
+denota la medida de Lebesgue.)
+
+\begin{proof}
+Primero demostramos el siguiente lema
+
+\begin{lemma}\label{le:finito}
+Todo conjunto $ \lambda $-medible es $ \sigma $- finito.
+\end{lemma}
+\begin{proof}
+Sea $A$ un conjunto $\lambda $-medible. Tenemos la igualdad
+\begin{equation}
+A = \bigcup_{n=1}^\infty (A \cap [-n,n])
+\end{equation}
+
+Adicionalmente, puesto que para todo $ n $, $ [-n,n] $ es boreleano y por lo tanto $ \lambda $-medible, tenemos que $A \cap [-n,n]$ también lo es y adicionalmente $$ \lambda(A \cap [-n,n]) \leq n < \infty. $$ 
+Por lo cual $A$ es la unión enumerable de conjuntos de medida finita. Concluimos que $ A $ es $ \sigma $- finito.
+\end{proof}
+
+Gracias al teorema de representación de Riez generalizado \cite[Teorema 12.35]{hewwit} podemos afirmar con certeza que la construcción de la medida de Lebesgue en la sección 9 de \cite{hewwit} es equivalente a la de la sección 12 del mismo libro. 
+
+En vista de lo anterior y del \autoref{le:finito}, es posible utilizar \cite[Teorema 10.34]{hewwit} para concluir que para cualquier conjunto $ \lambda$- medible $A $ existe un boreleano $C$ y un $\sigma$-compacto $F$ tal que $ F \subset A \subset C $ y $ \iota(C \cap F^C) = 0 $.
+
+Pero en la demostración se menciona que $C$ no solo es Boreleano sino que es $ G_\delta $ pues corresponde a la intersección de una secuencia de conjuntos abiertos que contienen a $ A $. Adicionalmente, un conjunto es $\sigma$-compacto si es la unión enumerable de conjuntos compactos. Puesto que en $ \mathbb{R} $ compacto implica cerrado concluimos que $F$ es un $F_\sigma$. Por ultimo, claramente $\iota(C \cap F ^C)$ implica que $\iota(C \cap A ^C) = \iota(A \cap F^C) = 0 $.
+ \end{proof}
+\end{enumerate}
+\invisiblesection{2}
+\item Sea $ \mu $ una medida positiva sobre $ X $, sea $ f : X \to [0, \infty] $ medible, $\int_X fd \mu = c $ con $ 0 < c < \infty $
+y sea $ \alpha $ una constante. Muestre que:
+
+\begin{equation}
+\lim_{n \to \infty} \int_X n\ln(1+(f/n)^\alpha)d\mu = \left\{
+	\begin{array}{ll}
+		\infty  & \mbox{si } 0 < \alpha < 1 
+		 \\ c & \mbox{si } \alpha = 1
+		 \\ 0 & \mbox{si } 1 < \alpha < \infty.
+	\end{array}
+\right. \nonumber
+\end{equation}
+
+\begin{proof}
+Puesto que $n \ln (1 + (f/n)^\alpha) $ se construye a partir de la suma, potenciación, composición con $ \ln $ que es continua y multiplicación por un escalar concluimos que $n \ln (1 + (f/n)^\alpha) $ es $ \mu $- medible. Ver \cite[Teoremas 11.7 y 11.8]{hewwit}
+
+%Primero debemos cerciorarnos de que la secuencia es creciente
+%
+%\begin{eqnarray}
+% & & (n+1)\ln(1+(f/(n+1))^\alpha)-n\ln(1+(f/n)^\alpha) \nonumber
+% \\ &=& n\ln(1+(f/(n+1))^\alpha)+\ln(1+(f/(n+1))^\alpha)-n\ln(1+(f/n)^\alpha) \nonumber
+% \\ &=& n\ln(\frac{(n+1)^\alpha+f^\alpha}{(n+1)^\alpha})+\ln(\frac{(n+1)^\alpha+f^\alpha}{(n+1)^\alpha})-n\ln(\frac{n^\alpha+f^\alpha}{n^\alpha}) \nonumber
+%  \\ &=& n\ln((n+1)^\alpha+f^\alpha)-n\ln((n+1)^\alpha)+\ln((n+1)^\alpha+f^\alpha) \nonumber
+%  \\& & -\ln((n+1)^\alpha)-n\ln(n^\alpha+f^\alpha)+n\ln(n^\alpha) \nonumber
+%  \\ &=& n(\ln((n+1)^\alpha+f^\alpha)-\ln((n+1)^\alpha)-\ln(n^\alpha+f^\alpha)+\ln(n^\alpha)) \nonumber
+%    \\& & + \ln((n+1)^\alpha+f^\alpha)-\ln((n+1)^\alpha) \nonumber
+%     \\ &=& n(\ln((n+1)^\alpha+f^\alpha)+\alpha(\ln(n)-\ln(n+1))-\ln(n^\alpha+f^\alpha)+\ln(n^\alpha)) \nonumber
+%    \\& & + \ln((n+1)^\alpha+f^\alpha)-\ln((n+1)^\alpha) \nonumber
+%\end{eqnarray} 
+
+Ahora para calcular la expresión que nos interesa enfoquemonos en el siguiente límite:
+\begin{equation}
+\lim_{x \to \infty} x\ln(1+(f/x)^\alpha) 
+= \lim_{x \to \infty} \frac{\ln(1+(f/x)^\alpha)}{\frac{1}{x}} \nonumber
+\end{equation}
+
+Cuando $ x \to \infty $ tenemos que $ 1/x \to 0 $ y $ (f/x)^\alpha \to 0 $ lo que implica que $ \ln(1+(f/x)^\alpha) \to \ln(1) = 0 $. Por lo anterior podemos usar la regla de L'Hopital.
+
+\begin{eqnarray}
+& & \lim_{x \to \infty} \frac{\ln(1+(f/x)^\alpha)}{\frac{1}{x}} \nonumber
+\\ &=& \lim_{x \to \infty} \frac{\frac{1}{1+(f/x)^\alpha}(-\alpha)\frac{f^\alpha}{x^{\alpha+1}}}{-\frac{1}{x^2}} \nonumber
+\\ &=& \lim_{x \to \infty} \alpha\frac{1}{\frac{x^{\alpha}+f^\alpha}{x^\alpha}}\frac{f^\alpha}{x^{\alpha-1}} \nonumber
+\\ &=& \lim_{x \to \infty} \alpha\frac{x^\alpha}{x^{\alpha}+f^\alpha}\frac{f^\alpha}{x^{\alpha-1}} \nonumber
+\\ &=& \lim_{x \to \infty} \alpha\frac{xf^\alpha}{x^{\alpha}+f^\alpha} \nonumber
+\\ &=& \lim_{x \to \infty} \alpha\frac{f^\alpha}{x^{\alpha-1}+f^\alpha/x} \nonumber
+\end{eqnarray}
+
+Nota: Recuérdese que en el Lema de Fatou el límite se toma de manera puntual. Por esta razón al calcular el límite anterior el $f$ se trata como una constante pues en realidad se esta calculando para cada $a \in X$.
+
+Esta ultima expresión es igual a $f$ si $\alpha = 1 $, 0 si $\alpha > 1$ y $\infty $ si $ \alpha<1. $. Puesto que este límite existe concluimos que nuestro límite inicial es igual, es decir,
+
+\begin{equation}
+\lim_{n \to \infty} n\ln(1+(f/n)^\alpha) = \left\{
+	\begin{array}{ll}
+		\infty  & \mbox{si } 0 < \alpha < 1 
+		 \\ f & \mbox{si } \alpha = 1
+		 \\ 0 & \mbox{si } 1 < \alpha < \infty.
+	\end{array}
+\right. \label{eq:lim}
+\end{equation}
+
+Si usamos el lema de Fatou $ \cite[12.23]{hewwit} $ sobre la secuencia tenemos que
+
+\begin{equation} \label{eq:fatou}
+ \int_x \liminf_{n \to \infty} n\ln(1+(f/n)^\alpha)d\mu \leq \liminf_{n \to \infty} \int_X n\ln(1+(f/n)^\alpha)d\mu
+\end{equation}
+
+Entonces para el caso $ 0 < \alpha < \infty $ por la ecuación \eqref{eq:fatou} concluimos que
+
+\begin{eqnarray*}
+& &\infty = \int_X \lim_{n \to \infty} n\ln(1+(f/n)^\alpha)d\mu = \int_X \liminf_{n \to \infty} n\ln(1+(f/n)^\alpha)d\mu
+\\&\leq&  \liminf_{n \to \infty} \int_X n\ln(1+(f/n)^\alpha)d\mu \leq \lim_{n \to \infty} \int_X n\ln(1+(f/n)^\alpha)d\mu = \infty
+\end{eqnarray*} 
+
+Por otra parte, para el caso $ \alpha \geq 1 $ se cumple la siguiente desigualdad.
+
+$$ n\ln((1+(f/n)^\alpha)) \leq n\ln((1+f/n)^\alpha) = \alpha n\ln((1+f/n) $$.
+
+Adicionalmente para todo $x \in \mathbb{R}_{\geq0} $ tenemos lo siguiente:
+
+\begin{equation}
+\ln(1+x)\leq x \label{eq:ln}
+\end{equation}
+
+Para demostrar esto obsérvese que para $ x=0 $, $ \ln(1) = 0 $.
+
+Por otra parte tenemos que para todo $x \in \mathbb{R}_{\geq0} $
+
+$$ 0 \leq \frac{d}{dx} \ln(1+x) = \frac{1}{1+x} \leq 1 = \frac{d}{dx} x. $$
+
+Esto quiere decir, por una parte que ambas funciones son crecientes para $x > 0$ y por otra que la función $x$ crece más rápido que la función $\ln(1+x)$. Por lo tanto concluimos \eqref{eq:ln}.
+
+Podemos usar \eqref{eq:ln} para el caso $x = f/n $ para concluir que
+
+$$ \ln(1+f/n) \leq f/n. $$
+
+A partir de esta expresión se deduce fácilmente que 
+
+$$ n\ln(1+(f/n)^\alpha) \leq \alpha n\ln(1+f/n)  \leq \alpha f. $$
+
+Por lo tanto, concluimos que la secuencia es dominada por $ \alpha f $ y por lo tanto podemos utilizar el teorema de convergencia dominada \cite[Teorema 12.24]{hewwit} para concluir que 
+
+\begin{equation}
+\lim_{n \to \infty} \int_X n \ln(1+(f/n)^\alpha) = \int_X \lim_{n \to \infty}  n\ln(1+(f/n)^\alpha))
+\end{equation}
+
+de donde concluimos por \eqref{eq:lim} que si $ \alpha = 1 $ entonces la expresión es igual a $ \int_X f d\mu = c $ y si $ \alpha \geq 1 $ entonces la expresión es igual a $ \int_X 0 d\mu = 0 $ 
+\end{proof}
+\item  Consiga funciones continuas $ f $ y $ g $ tales que $ f \in \mathcal{L}_2((0, \infty), \mathcal{B}, \lambda) $ pero $ f \not \in \mathcal{L}_1((0, \infty), \mathcal{B}, \lambda) $ y
+$ g \in \mathcal{L}_1((0, \infty), \mathcal{B}, \lambda)$ pero  $g \not \in \mathcal{L}_2((0, \infty), \mathcal{B}, \lambda) $
+\begin{proof}
+
+Hace falta demostrar que para las funciones elegidas la integral de Lebesgue es equivalente a la integral de Riemann.
+
+Tómese $ f = 1/(x+1) $.
+
+Tenemos que 
+\begin{equation}
+\int_X \frac{1}{x+1}d\lambda = \int_{0}^\infty \frac{1}{x+1}dx =  \ln(x+1)\Big|_0^\infty = \infty
+\end{equation}
+Mientras que
+\begin{equation}
+\int_X \frac{1}{(x+1)^2}d\lambda = \int_{1}^\infty \frac{1}{x^2}dx = -\frac{1}{x}\Big|_0^\infty = 1
+\end{equation}
+
+Por lo que concluimos que $ f \in \mathcal{L}_2((0, \infty), \mathcal{B}, \lambda) $ pero $ f \not \in \mathcal{L}_1((0, \infty), \mathcal{B}, \lambda) $
+
+Por otra parte, sea $g$ definida de la siguiente manera:
+
+\begin{equation}
+g(x) = \left\{
+	\begin{array}{ll}
+		1/\sqrt{x}  & \mbox{si } 0 < x \leq 1 
+		 \\ 1/x^2 & \mbox{si } x \geq 1
+	\end{array}
+\right.
+\end{equation}
+Es fácil comprobar que la función es continua usando el lema del pegamiento. Por otra parte, evaluando las integrales para comprobar si la función pertenece a $ \mathcal{L}_1 $ o $ \mathcal{L}_2 $ tenemos lo siguiente:
+\begin{equation}
+\int_X |g(x)|d\lambda = \int_{0}^1 \frac{1}{\sqrt{x}}dx + \int_{1}^\infty \frac{1}{x^2}dx =  2\sqrt{x}\Big|_0^1  -\frac{1}{x}\Big|_1^\infty = 3
+\end{equation}
+\begin{equation}
+\int_X |g^2(x)|d\lambda = \int_{0}^1 \frac{1}{x}dx + \int_{1}^\infty \frac{1}{x^4}dx =  \ln(x)\Big|_0^1  -\frac{1}{3}\frac{1}{x^3}\Big|_1^\infty = \infty
+\end{equation}
+
+Concluimos que $ g \in \mathcal{L}_1((0, \infty), \mathcal{B}, \lambda)$ pero  $g \not \in \mathcal{L}_2((0, \infty), \mathcal{B}, \lambda) $.
+ 
+\end{proof}
+\end{enumerate}
+\end{document}

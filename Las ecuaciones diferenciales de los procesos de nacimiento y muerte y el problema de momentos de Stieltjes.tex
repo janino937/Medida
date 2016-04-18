@@ -1,0 +1,174 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+ \numberwithin{equation}{section}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\declaretheorem{theorem}
+\declaretheorem[name=Lema, numberwithin=section,refname={lema,lemas},Refname={Lema,Lemas}]{lemma}
+\usepackage{fullpage}
+\usepackage{latexsym}	
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage{cleveref}
+\title{Las ecuaciones diferenciales de los procesos de nacimiento y muerte y el problema de momentos de Stieltjes}
+\newtheorem{theo}{Teorema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\usepackage{amsfonts}
+\usepackage{psfrag}
+\frenchspacing
+\newcommand{\Sp}{\textrm{Sp}}
+\newcommand{\Hom}{\textrm{Hom}}
+\newcommand{\id}{\textrm{id}}
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\begin{document}
+\maketitle
+
+El objetivo del proyecto con Alexander Getmanenko es entender el paper con el mismo nombre que el título escrito por S. Karlin y J. L. McGregor. En este paper se evidencia la fuerte relación entre las dos teorías mencionadas y se dan a conocer resultados obtenidos al evaluar una de las teorías a través de los ojos de la otra. Se empezará hablando sobre los conceptos básicos de los procesos de nacimiento y muerte así como también de la teoría de los problemas de momentos. Por ultimo, se evidenciará el punto en el que ambas teorías se encuentran y una breve descripción de los resultados principales a los que se llega en el paper.
+
+\section{Procesos de nacimiento y muerte}
+
+\textbf{Definiciones:}
+
+Un proceso estocástico es un conjunto de variables aleatorias que representan la evolución de un sistema de valores aleatorios a lo largo del tiempo.
+
+\textbf{Ejemplo:} Un vehículo transitando por una malla vial.
+
+Estos procesos se pueden modelar como un conjunto de estados y un conjunto de funciones de probabilidad de transición entre dichos estados. 
+
+Un proceso estocástico se dice de Markoff si cumplen la propiedad de Markoff también conocida como la propiedad de la no memoria. Esta propiedad dice que la probabilidad de transición es independiente del tiempo actual.
+
+En el contexto del artículo el espacio de estados es enumerable y las funciones se escriben como
+
+\begin{equation}
+P_{ij}(t) = Pr \{ X(t+s) = j | X(s) = i \} \nonumber
+\end{equation}
+
+y están bien definidas por la propiedad de la no memoria.
+
+Por ultimo un proceso se dice de \textbf{nacimiento y muerte} si las funciones de probabilidad de transición cumplen con las siguientes propiedades:
+
+\begin{eqnarray*}
+P_{i,i+1}(t) &=& \lambda_it + o(t),
+\\P_{i,i}(t) &=& 1 - (\lambda_i + \mu_i)t+o(t),
+\\P_{i,i-1}(t) &=& \mu_it + o(t),
+\end{eqnarray*}
+
+cuando $ t \to 0 $ donde $\lambda_i$ y $\mu_i$ se pueden interpretar como las tasas de absorción del estado $ i $ al estado $ i+1 $ e $ i-1 $ respectivamente.
+
+Un herramienta para estudiar dichos procesos es estudiar la matriz $P(t) $ formada por todas las funciones de transición $ P_{ij}$. A partir de esto se puede demostrar que dicha matriz infinita
+$ P(t) = (P_{ij}(t)), i, j = 0, 1, 2, \cdots $ satisface la ecuación
+\begin{equation}
+P'(t)=AP(t), t \geq 0, \nonumber
+\end{equation}
+
+donde
+
+\begin{equation}
+A=\begin{bmatrix}
+-(\lambda_0+ \mu_0), & \lambda_0 & 0 & 0
+\\ \mu_1 & -(\lambda_1+ \mu_1) & \lambda_1 & 0
+\\ 0 & \mu_2 & -(\lambda_2+ \mu_2)) & \lambda_2
+\\ & \ddots & \ddots& \ddots
+\end{bmatrix} \nonumber
+\end{equation}
+
+esta propiedad se conoce como la '\textbf{ecuación al revés}'. Si se suponen cosas adicionales se puede llegar a demostrar la '\textbf{ecuación al derecho}', es decir,
+
+$$ P'(t) = P(t)A, t \geq 0 $$ 
+Por ultimo se puede demostrar que si cumplen algunas de las dos condiciones anteriorres entones se cumple la condición inicial $$ P(0) = I $$.
+
+Entonces el propósito es estudiar la existencia, unicidad y demás propiedades de las matrices $ P(t) $.
+
+Dado un $ A $ cualquiera es posible demostrar que existen infinitas matrices $P(t)$ que cumplen las propiedades mencionadas anteriormente. Entonces se buscan propiedades adicionales que permitan elegir cuales de estas matrices puedan servir como matrices de probabilidad de transición. Estas propiedades son:
+
+\begin{equation}
+P_{ij}(t)  \geq 0,\nonumber
+\end{equation}
+
+\begin{equation}
+\sum_{j=0}^\infty P_{ij}(t) \leq 1. \nonumber
+\end{equation}
+
+Donde la desigualdad representa la posibilidad de que la partícula desaparezca a un estado en el infinito o a un estado cero si $ \mu_0 $ es positivo.
+
+Recientemente se ha demostrado que la ecuación al derecho es mucho más compleja si se considera el caso más general en el que existen estados al infinito o estado cero pero aún así hay una clase importante de procesos para los cuales la ecuación si se expresa de esa manera.
+
+En este punto se introduce el otro tema en el paper que es el problema del momento de Stieltjes. Para ello necesitamos otro conjunto de definiciones.
+
+\section{El problema de momentos de Stieltjes}
+
+\textbf{Definiciones:}
+
+El $n$-ésimo momento de una distribución probabilistica $F$ se define como
+
+\begin{equation}
+\mu_n = E[X^n] = \int_{-\infty}^{+\infty} x^ndF = \int_{-\infty}^{+\infty} x^nf(x)dx 
+\end{equation}
+
+donde $f(x) $ es la función de masa o función de densidad de la distribución $F$. 
+
+Una secuencia de polinomios se dice ortogonal con respecto a la medida (o a la distribución de probabilidad) $ \psi $ en el intervalo (a,b) si se cumple que
+\begin{equation}
+\int_{a}^b  P_m(x)P_n(x)d\psi = 0 \text{ para } m \not = n, \nonumber
+\end{equation}
+
+Se puede definir el funcional
+
+$$ L(f)= \int_{a}^b f(x)d\psi $$ y entonces podemos definir el $n$-ésimo momento como
+
+\begin{equation}
+\mu_n = L(x_n)	\nonumber
+\end{equation}
+
+De hecho este funcional sería equivalente a la esperanza.
+
+Se puede ver por la definición que el funcional $L$ es un funcional lineal y por lo tanto si escribimos un polinomio como 
+
+\begin{equation}
+Q(x) = \sum_{k=0}^n c_kx^k \nonumber
+\end{equation}
+
+entonces $ L(Q) = \sum_{k=0}^n c_k\mu_k $ así que podemos definir este funcional $L$ directamente de la secuencia de momentos. Incluso se puede partir desde secuencias al azar.
+
+Por ultimo, por problemas de momentos se refiere al hecho de encontrar una medida $ \mu $ para la cual una secuencia dada $c_k$ corresponde con la secuencia de momentos de la medida $d\mu$. Aquí se hace distinción entre tres problemas de momentos distintos dependiendo del rango de integración en el que se evalúa el momento. El de Haussdorf
+en el que 
+$$ c_k = \int_0^1 x^kd\mu   $$.
+
+El de Stieltjes en el que $$ c_k = \int_a^\infty x^kd\mu   $$
+
+Y el de Hamburg en el que $$ c_k = \int_{-\infty}^{+\infty} x^kd\mu   $$
+
+De manera equivalente se puede hablar del problema de momentos no partiendo de una secuencia de números sino de una secuencia de polinomios donde la pregunta es si existe una medida $\mu$ tal que la secuencia es ortogonal bajo esa medida.
+
+\section{El punto en común de las dos teorías}
+
+Finalmente volviendo al tema de los procesos, a partir de la matriz $A$ se puede obtener una secuencia de polinomios de la siguiente manera.
+
+Empezamos definiendo las siguientes relaciones de recurrencia 
+
+$$ -xQ_0(x) = -(\lambda_0 + \mu_0)Q_0(x) + \lambda_0Q_1(x) $$
+
+$$ -xQ_n(x) = \mu_nQ_{n-1}(x) -(\lambda_n + \mu_n)Q_n(x) + \lambda_nQ_{n+1}(x), n \geq 1 $$
+
+o de manera más compacta $ -xQ = AQ $.
+
+Y entonces si aplicamos la condición normalizante $ Q_0(x)=1 $. Obtenemos una secuencia de polinomios $ \{Q_n(x)\} $. La pregunta en este punto es si esta secuencia resultara ser una secuencia de polinomios ortogonales para alguna medida $ \mu $.
+
+Lo anterior es lo que se conoce como el problema de momentos de Stieltjes, como se mostró anteriormente, y la respuesta es que sí. De hecho se demuestra que existe una correspondencia entre todas las matrices $A$ de procesos de nacimiento y muerte y todos los problemas de Stieltjes que son solucionables. Adicionalmente se discuten propiedades que la medida $\mu$ debe tener para que los procesos y en particular la matriz $ P(t) $ tenga las propiedades mencionadas al inicio de la charla.
+
+%Un proceso estocástico se dice estacionario si su distribución de probabilidad conjunta no cambia con respecto al tiempo y por lo tanto tampoco parámetros estadísticos como la media y la varianza.
+
+\end{document}

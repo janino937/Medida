@@ -1,0 +1,52 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+ \numberwithin{equation}{section}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\declaretheorem{theorem}
+\declaretheorem[name=Lema, numberwithin=section,refname={lema,lemas},Refname={Lema,Lemas}]{lemma}
+\usepackage{fullpage}
+\usepackage{latexsym}	
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage{cleveref}
+\title{Las ecuaciones diferenciales de los procesos de nacimiento y muerte y el problema de momentos de Stieltjes}
+\newtheorem{theo}{Teorema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\usepackage{amsfonts}
+\usepackage{psfrag}
+\frenchspacing
+\newcommand{\Sp}{\textrm{Sp}}
+\newcommand{\Hom}{\textrm{Hom}}
+\newcommand{\id}{\textrm{id}}
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\begin{document}
+\maketitle
+
+\section{Abstract}
+
+El objetivo del proyecto con Alexander Getmanenko es entender el paper con el mismo nombre que el título escrito por S. Karlin y J. L. McGregor. En este paper se evidencia la fuerte relación entre las dos teorías mencionadas y se dan a conocer resultados obtenidos al evaluar una de las teorías a través de los ojos de la otra. Durante la charla, se empezará hablando sobre los conceptos básicos de los procesos de nacimiento y muerte así como también de la teoría de los problemas de momentos. Por ultimo, se evidenciará el punto en el que ambas teorías se encuentran y una breve descripción de uno de los resultados principales al que se llega en el artículo: El conjunto de problemas de Stieltjes solucionables genera el conjunto de matrices asociadas a procesos de nacimiento y muerte y viceversa.
+\cite{chihara_introduction_2011}
+\cite{_introduction_1968}
+\cite{_introduction_1971}
+\cite{karlin_differential_1957}
+
+\textbf{Palabras claves:} Polinomios ortogonales, momentos, medida, procesos de Markoff, matrices infinitas.
+
+
+   \bibliographystyle{alpha}
+    \bibliography{birth}
+\end{document}
