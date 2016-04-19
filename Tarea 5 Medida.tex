@@ -50,29 +50,28 @@ $\mathbb{Q} $ no es un $G_\delta$. Para demostrar esto necesitamos usar parte de
 
 Un espacio de Baire es un espacio topológico que tiene la siguiente propiedad:
 
-Para cada colección enumerable de conjuntos abiertos densos $ \{U_n\}_{n=1}^\infty $, su intersección $ \bigcap_{n=1}^\infty U_n $ es densa.
+Para cada colección enumerable de conjuntos abiertos densos $ \{U_n\}_{n=1}^\infty $, su intersección $ \bigcap_{n=1}^\infty U_n $ es densa. Ver \cite[Lema 48.1]{rudin}
 
-\begin{lemma} \label{le:Baire}
-$ \mathbb{R} $ es un espacio de Baire. 
-\end{lemma}
-
-\begin{proof}
-
-\end{proof}
+Una herramienta útil para manejar espacios de Baire es el llamado \textbf{teorema de categorización de Baire} que enuncia que un espacio localmente compacto de Hausdorff o un espacio métrico completo es un espacio de Baire. A partir de lo cual podemos concluir que $ \mathbb{R} $ y cualquier subespacio abierto y cerrado de $\mathbb{R}$ son espacios de Baire. Ver \cite[Teorema 48.2]{rudin}
 
 Ahora para demostrar que $\mathbb{Q} $ no es un $G_\delta$ supongase lo contrario. Entonces existe una colección de abiertos $ U_n $ tal que $ \bigcap_{n=1}^\infty U_n = \mathbb{Q} $. Puesto que cada $ U_n $ contiene a $ \mathbb{Q} $ podemos concluir que $U_n $ es denso.
 
-Denotese por $ \mathbb{I} $ al conjunto de los irracionales.  Puesto que $\mathbb{Q} $ es un $ F_\sigma $ tenemos que su complemento $\mathbb{I}$ es un $G_\delta$ y es igual a la intersección de la colección $\{\mathbb{R}\backslash \{q\}|q \in \mathbb{Q} \} $. Esta colección también resulta ser una colección enumerable de abiertos densos. 
+Denótese por $ \mathbb{I} $ al conjunto de los irracionales.  Puesto que $\mathbb{Q} $ es un $ F_\sigma $ tenemos que su complemento $\mathbb{I}$ es un $G_\delta$ y es igual a la intersección de la colección $\{\mathbb{R}\backslash \{q\}|q \in \mathbb{Q} \} $. Esta colección también resulta ser una colección enumerable de abiertos densos. 
 
-Sin embargo si tomo la intersección de las dos colecciones su resultado es vacío y esto contradice el hecho que $ \mathbb{R} $ es un espacio de Baire.
+Sin embargo, si tomo la intersección de las dos colecciones su resultado es vacío y esto contradice el hecho que $ \mathbb{R} $ es un espacio de Baire.
 
 \end{proof}
 
 \item Escriba un conjunto $ A \in \mathcal{B}(\mathbb{R}) $ que no es ni un $ F_\sigma $ ni un $ G_\delta $ (demuestre por qué).
 \begin{proof}
-Considere el conjunto $[(-1,1) \cap \mathbb{Q}] \cup [(-1,1)^C \cap \mathbb{I}]$. Claramente este conjunto se encuentra en la $ \sigma $-algebra de Borel de $\mathbb{R}$ pues se obtiene a partir de la intersección, unión y complementos de abiertos, cerrados, $G_\delta$ y $F_\sigma $ todos en la $ \sigma $- álgebra de Borel.
+Considere el conjunto $A = [(-1,1) \cap \mathbb{Q}] \cup [(-1,1)^C \cap \mathbb{I}]$. Claramente este conjunto se encuentra en la $ \sigma $-algebra de Borel de $\mathbb{R}$ pues se obtiene a partir de la intersección, unión y complementos de abiertos, cerrados, $G_\delta$ y $F_\sigma $ todos en la $ \sigma $- álgebra de Borel.
 
-Pero adicionalmente este conjunto cumple la propiedad de no ser un $G_\delta$ ni un $F_\sigma$. 
+Pero adicionalmente este conjunto cumple la propiedad de no ser un $G_\delta$ ni un $F_\sigma$.
+
+Para demostrar esto suponga que el conjunto es un $ G_\delta $. Entonces existe una secuencia $ \{U_n\} $ de conjuntos abiertos tal que $ A = \bigcap_{n=0}^\infty U_n $. Por lo tanto si tomamos la secuencia $\{U_n \cap (-1,1)\}$ tendríamos una secuencia de conjuntos abiertos cuya intersección es igual a $ (-1,1) \cap \mathbb{Q} $. Pero usando los mismos argumentos para demostrar que $\mathbb{Q}$ no es un $G_\delta$ (ver el literal anterior) llegamos a una contradicción, pues $(-1,1) $ es también un espacio de Baire y $ \mathbb{Q} $ es denso en este subespacio.
+
+Ahora para demostrar que no es $ F_\sigma $ supongase por contradicción que el complemento $ [(-1,1) \cap \mathbb{I}] \cup [(-1,1)^C \cap \mathbb{Q}] $ es $ G_\delta $. De nuevo tendriamos una secuencia de conjuntos abiertos $\{V_n\}$ tales que $\bigcap_{n=0}^\infty V_n = A^C$. Pero entonces si tomamos la secuencia de $\{V_n \cap (-1,1)^C\}$ esta sería una secuencia de abiertos (en la topología de subespacio de $ (-1,1)^C $ que también es de Baire) cuya intersección es igual a $ (-1,1)^C  \cap \mathbb{Q}$ lo cual también es una contradicción por un argumento análogo al anterior.
+
 \end{proof}
 
 \item Muestre que si $ A \in \mathcal{B}(\mathbb{R}) $ entonces $ A $ difiere de ser $ F\sigma $ o $ G\delta $ por un conjunto $ \lambda $–nulo. ($ \lambda $
@@ -94,11 +93,11 @@ Adicionalmente, puesto que para todo $ n $, $ [-n,n] $ es boreleano y por lo tan
 Por lo cual $A$ es la unión enumerable de conjuntos de medida finita. Concluimos que $ A $ es $ \sigma $- finito.
 \end{proof}
 
-Gracias al teorema de representación de Riez generalizado \cite[Teorema 12.35]{hewwit} podemos afirmar con certeza que la construcción de la medida de Lebesgue en la sección 9 de \cite{hewwit} es equivalente a la de la sección 12 del mismo libro. 
+Gracias al teorema de representación de Riez generalizado \cite[Teorema 12.35]{hewitt} podemos afirmar con certeza que la construcción de la medida de Lebesgue en la sección 9 de \cite{hewitt} es equivalente a la de la sección 12 del mismo libro. 
 
-En vista de lo anterior y del \autoref{le:finito}, es posible utilizar \cite[Teorema 10.34]{hewwit} para concluir que para cualquier conjunto $ \lambda$- medible $A $ existe un boreleano $C$ y un $\sigma$-compacto $F$ tal que $ F \subset A \subset C $ y $ \iota(C \cap F^C) = 0 $.
+En vista de lo anterior y del \autoref{le:finito}, es posible utilizar \cite[Teorema 10.34]{hewitt} para concluir que para cualquier conjunto $ \lambda$- medible $A $ existe un boreleano $C$ y un $\sigma$-compacto $F$ tal que $ F \subset A \subset C $ y $ \iota(C \cap F^C) = 0 $.
 
-Pero en la demostración se menciona que $C$ no solo es Boreleano sino que es $ G_\delta $ pues corresponde a la intersección de una secuencia de conjuntos abiertos que contienen a $ A $. Adicionalmente, un conjunto es $\sigma$-compacto si es la unión enumerable de conjuntos compactos. Puesto que en $ \mathbb{R} $ compacto implica cerrado concluimos que $F$ es un $F_\sigma$. Por ultimo, claramente $\iota(C \cap F ^C)$ implica que $\iota(C \cap A ^C) = \iota(A \cap F^C) = 0 $.
+Pero en la demostración se menciona que $C$ no solo es Boreleano sino que es $ G_\delta $ (solo para el caso en que $ \iota(A) < \infty $) pues corresponde a la intersección de una secuencia de conjuntos abiertos que contienen a $ A $. Adicionalmente, un conjunto es $\sigma$-compacto si es la unión enumerable de conjuntos compactos. Puesto que en $ \mathbb{R} $ compacto implica cerrado concluimos que $F$ es un $F_\sigma$. Por ultimo, claramente $\iota(C \cap F ^C)$ implica que $\iota(C \cap A ^C) = \iota(A \cap F^C) = 0 $.
  \end{proof}
 \end{enumerate}
 \invisiblesection{2}
@@ -116,7 +115,7 @@ y sea $ \alpha $ una constante. Muestre que:
 \end{equation}
 
 \begin{proof}
-Puesto que $n \ln (1 + (f/n)^\alpha) $ se construye a partir de la suma, potenciación, composición con $ \ln $ que es continua y multiplicación por un escalar concluimos que $n \ln (1 + (f/n)^\alpha) $ es $ \mu $- medible. Ver \cite[Teoremas 11.7 y 11.8]{hewwit}
+Puesto que $n \ln (1 + (f/n)^\alpha) $ se construye a partir de la suma, potenciación, composición con $ \ln $ que es continua y multiplicación por un escalar concluimos que $n \ln (1 + (f/n)^\alpha) $ es $ \mu $- medible. Ver \cite[Teoremas 11.7 y 11.8]{hewitt}
 
 %Primero debemos cerciorarnos de que la secuencia es creciente
 %
@@ -163,7 +162,7 @@ Esta ultima expresión es igual a $f$ si $\alpha = 1 $, 0 si $\alpha > 1$ y $\in
 \right. \label{eq:lim}
 \end{equation}
 
-Si usamos el lema de Fatou $ \cite[12.23]{hewwit} $ sobre la secuencia tenemos que
+Si usamos el lema de Fatou $ \cite[12.23]{hewitt} $ sobre la secuencia tenemos que
 
 \begin{equation} \label{eq:fatou}
  \int_x \liminf_{n \to \infty} n\ln(1+(f/n)^\alpha)d\mu \leq \liminf_{n \to \infty} \int_X n\ln(1+(f/n)^\alpha)d\mu
@@ -202,7 +201,7 @@ A partir de esta expresión se deduce fácilmente que
 
 $$ n\ln(1+(f/n)^\alpha) \leq \alpha n\ln(1+f/n)  \leq \alpha f. $$
 
-Por lo tanto, concluimos que la secuencia es dominada por $ \alpha f $ y por lo tanto podemos utilizar el teorema de convergencia dominada \cite[Teorema 12.24]{hewwit} para concluir que 
+Por lo tanto, concluimos que la secuencia es dominada por $ \alpha f $ y por lo tanto podemos utilizar el teorema de convergencia dominada \cite[Teorema 12.24]{hewitt} para concluir que 
 
 \begin{equation}
 \lim_{n \to \infty} \int_X n \ln(1+(f/n)^\alpha) = \int_X \lim_{n \to \infty}  n\ln(1+(f/n)^\alpha))
@@ -214,41 +213,128 @@ de donde concluimos por \eqref{eq:lim} que si $ \alpha = 1 $ entonces la expresi
 $ g \in \mathcal{L}_1((0, \infty), \mathcal{B}, \lambda)$ pero  $g \not \in \mathcal{L}_2((0, \infty), \mathcal{B}, \lambda) $
 \begin{proof}
 
-Hace falta demostrar que para las funciones elegidas la integral de Lebesgue es equivalente a la integral de Riemann.
+Tómese $ f(x) = 1/(x+1) $.
 
-Tómese $ f = 1/(x+1) $.
+Para calcular la integral podemos usar el hecho de que esta función es el límite de una secuencia de funciones continuas de soporte compacto. Considere la secuencia de funciones $ \{ f_{n}(x) \}$ definida de la siguiente manera
+$$f_n(x) = \left\{\begin{array}{ll}
+0 & \mbox{si } x \leq 1/2n
+\\\mbox{lineal} & \mbox{si } 1/2n \leq x \leq 1/n
+\\1/(x+1) & \mbox{si } 1/n \leq n 
+\\\mbox{lineal} & \mbox{si } n \leq x \leq n+1
+\\0 & \mbox{si } n+1 \leq x
+\end{array} 
+\right. $$
+donde lineal indica que la función se define de tal manera que la función es lineal en dicho intervalo manteniendo la continuidad de la función. De esta manera las funciones son continuas y de soporte compacto pues solo son distintas a 0 en el intervalo $[1/2n, n]$.
 
-Tenemos que 
+Es fácil ver que la secuencia es monótona y que su límite es precisamente la función $f(x)$ pues para cualquier $x \in (0,\infty)$ existe un $n \in \mathbb{N}$ tal que $x \in [1/2m,m] $ para todo $ m \geq n $ y por lo tanto $ f_m(x) = f(x) $.  
+Luego podemos usar Bepo Levi \cite[Teorema 12.22]{hewitt} para concluir que  
 \begin{equation}
-\int_X \frac{1}{x+1}d\lambda = \int_{0}^\infty \frac{1}{x+1}dx =  \ln(x+1)\Big|_0^\infty = \infty
+\int_X |f(x)|d\lambda = \int_X \lim_{n \to \infty} f_n(x)d\lambda = \lim_{n \to \infty} \int_X f_n(x)d\lambda
 \end{equation}
-Mientras que
+
+Ahora, gracias al teorema de representación de Riesz \cite[Teorema 12.36]{hewitt} sabemos que para las funciones de soporte compacto $ f_n $ la integral de Lebesgue coincide con la integral de Riemann. Por lo tanto, tenemos que 
+
+\begin{eqnarray*}
+ \lim_{n \to \infty} \int_X f_n(x)d\lambda &=& \lim_{n \to \infty} \int_{1/n}^n f_n(x)dx
+ \\&=& \lim_{n \to \infty} 1/(4+4n) + \ln(n+1)-\ln(1/n+1) + 1/2n
+ \\&=& 0 + \infty-0 + 0
+  \\&=& \infty
+\end{eqnarray*}
+
+Concluimos que $f \not \in \mathcal{L}_1$.
 \begin{equation}
 \int_X \frac{1}{(x+1)^2}d\lambda = \int_{1}^\infty \frac{1}{x^2}dx = -\frac{1}{x}\Big|_0^\infty = 1
 \end{equation}
 
-Por lo que concluimos que $ f \in \mathcal{L}_2((0, \infty), \mathcal{B}, \lambda) $ pero $ f \not \in \mathcal{L}_1((0, \infty), \mathcal{B}, \lambda) $
+Ahora para calcular la integral de $ |f(x)^2| = 1/(x+1)^2 $ de nuevo nos valemos de una sucesión monótona de funciones continuas de soporte compacto que convergen puntualmente a $ 1/(x+1)^2 $. Sea esta secuencia $\{f'_n(x)\}$ definida como
+
+$$f'_n(x) = \left\{\begin{array}{ll}
+0 & \mbox{si } x \leq 1/2n
+\\\mbox{lineal} & \mbox{si } 1/2n \leq x \leq 1/n
+\\1/(x^2+1)^2 & \mbox{si } 1/n \leq n 
+\\\mbox{lineal} & \mbox{si } n \leq x \leq n+1
+\\0 & \mbox{si } n+1 \leq x
+\end{array} 
+\right. $$
+
+Usando el mismo argumento que para la integral anterior tenemos que 
+
+\begin{eqnarray*}
+ \int_X |f(x)|^2d\lambda &=& \int_X \lim_{n \to \infty} f'_n(x)d\lambda
+ \\&=&\lim_{n \to \infty} \int_X f'_n(x)d\lambda 
+ \\&=& \lim_{n \to \infty} \int_{1/n}^n f'_n(x)dx
+ \\&=& \lim_{n \to \infty} n/(4(n+1)^2)-1/(n+1)+1/(1/n+1) + 1/2n^2
+ \\&=& 0 -0+ 1 + 0
+  \\&=& 1
+\end{eqnarray*}
+
+Por lo que concluimos que $f \in \mathcal{L}_2$.
 
 Por otra parte, sea $g$ definida de la siguiente manera:
-
 \begin{equation}
 g(x) = \left\{
 	\begin{array}{ll}
-		1/\sqrt{x}  & \mbox{si } 0 < x \leq 1 
-		 \\ 1/x^2 & \mbox{si } x \geq 1
+		\frac{1}{\sqrt{x}}-1  & \mbox{si } 0 < x \leq 1 
+		 \\ 0 & \mbox{de lo contrario } x \geq 1
 	\end{array}
 \right.
 \end{equation}
-Es fácil comprobar que la función es continua usando el lema del pegamiento. Por otra parte, evaluando las integrales para comprobar si la función pertenece a $ \mathcal{L}_1 $ o $ \mathcal{L}_2 $ tenemos lo siguiente:
+Es fácil comprobar que la función es continua usando el lema del pegamiento. De nuevo vamos a usar el mismo método usado anteriormente para evaluar las integrales que determinaran si la función pertenece o no $ \mathcal{L}_1 $ o $ \mathcal{L}_2 $. Para lo primero considere la secuencia $\{g_n(x)\} $ definida como
+
 \begin{equation}
-\int_X |g(x)|d\lambda = \int_{0}^1 \frac{1}{\sqrt{x}}dx + \int_{1}^\infty \frac{1}{x^2}dx =  2\sqrt{x}\Big|_0^1  -\frac{1}{x}\Big|_1^\infty = 3
-\end{equation}
-\begin{equation}
-\int_X |g^2(x)|d\lambda = \int_{0}^1 \frac{1}{x}dx + \int_{1}^\infty \frac{1}{x^4}dx =  \ln(x)\Big|_0^1  -\frac{1}{3}\frac{1}{x^3}\Big|_1^\infty = \infty
+g_n(x) = \left\{
+	\begin{array}{ll}
+		0 & \mbox{si } x \leq 1/2n
+		\\\mbox{lineal} & \mbox{si } 1/2n \leq x \leq 1/n
+		\\\frac{1}{\sqrt{x}}-1 & \mbox{si } 1/n \leq 1 
+		\\0 & \mbox{si } 1 \leq x
+	\end{array}
+\right.
 \end{equation}
 
-Concluimos que $ g \in \mathcal{L}_1((0, \infty), \mathcal{B}, \lambda)$ pero  $g \not \in \mathcal{L}_2((0, \infty), \mathcal{B}, \lambda) $.
- 
+De nuevo la secuencia resulta ser una secuencia monótona de funciones de soporte compacto que converge puntualmente a $ g $ aunque esta vez los intervalos donde las funciones no son cero son $ [1/2n,1] $. Por lo tanto tenemos por los mismos argumentos anteriores que
+
+\begin{eqnarray*}
+ \int_X |g(x)|d\lambda &=& \int_X \lim_{n \to \infty} g_n(x)d\lambda
+ \\&=&\lim_{n \to \infty} \int_X g_n(x)d\lambda 
+ \\&=& \lim_{n \to \infty} \int_{1/n}^1 g_n(x)dx
+ \\&=& \lim_{n \to \infty} \frac{\sqrt{n}-1}{4n} +2-2\sqrt{1/n}-1+1/n
+ \\&=& 0 +2 +0- 1 + 0
+  \\&=& 1
+\end{eqnarray*}
+
+Por lo que $ g \in \mathcal{L}_2 $.
+
+Por otra parte considérese la sucesión de funciones $g'(x) $ definida como
+
+\begin{equation}
+g'_n(x) = \left\{
+	\begin{array}{ll}
+		0 & \mbox{si } x \leq 1/2n
+		\\\mbox{lineal} & \mbox{si } 1/2n \leq x \leq 1/n
+		\\(\frac{1}{\sqrt{x}}-1)^2 & \mbox{si } 1/n \leq 1 
+		\\0 & \mbox{si } 1 \leq x
+	\end{array}
+\right.
+\end{equation}
+
+Vemos que esta sucesión converge a $|g(x)|^2 $. Por lo usando de nuevo los mismos argumentos anteriores tenemos que
+
+\begin{eqnarray*}
+ \int_X |g(x)|^2d\lambda &=& \int_X \lim_{n \to \infty} g'_n(x)d\lambda
+ \\&=&\lim_{n \to \infty} \int_X g'_n(x)d\lambda 
+ \\&=& \lim_{n \to \infty} \int_{1/n}^1 g'_n(x)dx
+ \\&=& \lim_{n \to \infty} \frac{(\sqrt{n}-1)^2}{4n}+\ln(1)-\ln(1/n) +4-4\sqrt{1/n}+1-1/n
+ \\&=& \frac{1}{4} +0 -(-\infty)-4+0 - 0
+  \\&=& \infty
+\end{eqnarray*}
+
+Concluimos que  $g \not \in \mathcal{L}_2 $.
+
 \end{proof}
 \end{enumerate}
+
+\bibliography{medida}
+\bibliographystyle{alpha}
+
 \end{document}
