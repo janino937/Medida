@@ -1,0 +1,149 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+
+\usepackage{amsmath}
+ \numberwithin{equation}{section}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\declaretheorem{theorem}
+\declaretheorem[name=Lema, numberwithin=section,refname={lema,lemas},Refname={Lema,Lemas}]{lemma}
+\usepackage{fullpage}
+\usepackage{latexsym}	
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage{cleveref}
+\title{Tarea 6}
+\newtheorem{theo}{Teorema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\usepackage{amsfonts}
+\usepackage{psfrag}
+\frenchspacing
+\newcommand{\Sp}{\textrm{Sp}}
+\newcommand{\Hom}{\textrm{Hom}}
+\newcommand{\id}{\textrm{id}}
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\begin{document}
+\maketitle
+
+\invisiblesection{1}
+\begin{enumerate}[label = (\textbf{\arabic*.})]
+\item \begin{enumerate}[label = (\textbf{\alph*.})]
+\item Sea $ \mathcal{H} $ un espacio de Hilbert. Muestre directamente (como sugerido en el Ejercicio 16.56, p.255 del libro) que para todo funcional lineal acotado $ f $ sobre $ \mathcal{H} $ existe un único $ y \in \mathcal{H} $ tal que
+\begin{equation}
+f(x) = \langle x,y \rangle
+\end{equation}
+
+para todo $ x \in \mathcal{H} $ y qu además, $ ||f|| = ||y|| $.
+
+\begin{proof}
+En el libro se menciona como sugerencia utilizar el Ejercicio 16.42 p.252. En este ejercicio se pide probar que si se tiene un espacio $ H $ y un subespacio $ M $ de $ H $ entonces existe un espacio $ M^\perp $ tal que $ H = M \oplus M^\perp $. Esto sin embargo, se ha demostrado anteriormente en curso como álgebra lineal. La demostración se realiza extendiendo la base ortogonal de $ M $ a una base ortogonal de $ H $ y tomando $ M^\perp $ como el span de los elementos agregados. No se darán más detalles con respecto a esta demostración.
+
+Sea $ f $ un funcional lineal acotado. Sea $ M = f^{-1}(0) $. En efecto $ M $ resulta ser un subespacio de $H$. Esto también se demuestra en álgebra lineal y a este subespacio se le llama el kernel de $ f $. Valiendonos del Ejercicio 16.42 p.252. tenemos un subespacio $ M^\perp $ tal que $ M $ y $ M^{\perp} $ son ortogonales y $ M \oplus M^\perp = H $.
+
+Si $ M = H $ entonces $ f(x)= 0 $ para todo $ x \in H $ y por lo tanto, podemos tomar $ y = 0 $, pues por propiedades del producto interno tenemos que
+\begin{equation}
+f(x) = \langle x,0 \rangle = 0
+\end{equation}
+
+En caso contrario tenemos que $ M^\perp $ es distinto al espacio trivial $ \{0\} $. Por lo tanto existe un elemento no cero $ z \in M^{\perp} $ y tomamos $ y = \overline{f(z)}\text{ }||z||^{-2} z $.
+
+Para demostrar que nuestra elección del elemento $ y $ es correcta, partimos con la siguiente observación: Para todo $ x \in H $, $ (x - \frac{f(x)}{f(z)}z) \in M $, pues si aplicamos el funcional $ f $ a este elemento tenemos que
+\begin{equation}
+f(x - \frac{f(x)}{f(z)}z) = f(x)- \frac{f(x)}{f(z)}f(z) = 0
+\end{equation}
+
+Es fácil ver que $ y \in M^\perp $ y por lo tanto para todo $ x \in H $ tenemos que $ (x - \frac{f(x)}{f(z)}z) $ y $ y $ son perpendiculares. Dicho de otra manera
+
+\begin{equation}
+\langle (x - \frac{f(x)}{f(z)}z), \overline{f(z)}\text{ }||z||^{-2} z \rangle = 0.
+\end{equation}
+
+Usando las propiedades del producto interno podemos desarrollar la expresión anterior.
+
+\begin{eqnarray*}
+\langle (x - \frac{f(x)}{f(z)}z), \overline{f(z)}\text{ }||z||^{-2} z \rangle &=& 0
+\\ \langle x , \overline{f(z)}\text{ }||z||^{-2} z \rangle &=& \langle \frac{f(x)}{f(z)}z , \overline{f(z)}\text{ }||z||^{-2} z \rangle
+\\&=& \frac{f(x)}{f(z)} \overline{\bigg(\frac{\overline{f(z)}}{||z||^{2}}\bigg)} \langle z , z \rangle
+\\&=& \frac{f(x)}{f(z)} \frac{f(z)}{||z||^{2}}||z||^2
+\\&=& f(x) 
+\end{eqnarray*}
+
+Queda demostrado que $ f(x)= \langle x, y \rangle  $.
+
+La unicidad de $ y $ esta dada por la desigualdad de Cauchy-Bunyakovskií-Schwarz.
+
+Sean $ y,y' $ tales que $ f(x) = \langle x, y \rangle = \langle x, y' \rangle$. Por un lado tenemos que $ f(y) = \langle y, y \rangle = \langle y, y' \rangle  $. Por el otro lado tenemos que $ f(y') = \langle y', y \rangle = \langle y', y' \rangle  $. Luego tenemos que
+\begin{equation}
+\langle y, y \rangle \langle y', y' \rangle = \langle y, y' \rangle \langle y', y \rangle 
+\end{equation}
+
+Esta igualdad solamente se da si $ y $ es linealmente dependiente de $ y' $, (ver Teorema 16.2 p.234) es decir, que existe $ \alpha $ tal que $ y' = \alpha y $. Pero adicionalmente tenemos que
+
+$$ f(x) = \langle x, y \rangle = \langle x, \alpha y \rangle =\overline{\alpha} \langle x, y \rangle $$ de donde concluimos que $ \alpha = \overline{\alpha} = 1 $. Luego $ y = y' $.
+
+Solo resta demostrar que $ ||f|| = ||y|| $.
+
+El teorema 14.2 p.210 nos dice que $$ ||f|| = \sup \bigg \{\frac{||f(x)||}{||x||}: x \in H, x \not = 0\bigg \}.$$ Por nuestra definición de $ y $ tenemos que 
+$$||y|| = ||(\overline{f(z)}||z||^{-2})z|| = \frac{||f(z)||\text{ }||z||}{||z||^2}=  \frac{||f(z)||}{||z||}. $$
+
+Por lo cual concluimos que $||y|| \leq ||f|| $. 
+
+Para la otra desigualdad nótese que por la desigualdad de Cauchy-Bunyakovskií-Schwarz $$ \langle x,x \rangle  \langle y,y \rangle \geq  \langle x, y \rangle \langle y, x \rangle.  $$
+
+O de manera equivalente 
+
+$$ ||x|| \text{ } ||y || \geq  |\langle x, y \rangle|.  $$ Pero por lo demostrado anteriormente tenemos que $||f(x)|| = |\langle x, y \rangle|$. Por lo cual concluimos que para cualquier $ x \in H $
+
+$$ ||y|| \geq \frac{||f(x)||}{||x||}.$$ Concluimos que $ ||f|| = ||y|| $
+\end{proof}
+\item Utilice la respuesta en \textbf{(a.)} para mostrar que para todo funcional lineal acotado sobre $ \mathcal{L}_2(X, \mathcal{A}, \mu) $ (puede considerar espacios de medida regulares y $ \sigma- $finitos) existe $ h \in \mathcal{L}_2(X, \mathcal{A}, \mu)  $ tal que
+\begin{equation}
+L(f) = \int_X f\overline{h}\text{ } d\mu
+\end{equation}
+(Esto se utilizó sin demostración para demostrar el Lema 19.22 p.313 que era la base de la demostración del teorema de Lebesgue-Radon-Nykodým.)
+
+\begin{proof}
+Por lo discutido en la sección 13 sabemos que $ \mathcal{L}_2(X, \mathcal{(A)}, \mu) $ con el producto interno
+$$ \langle f,g \rangle = \int_X f\overline{g}\text{ }d\mu $$ es un espacio de Hilbert (ver 13.11 y 13.15).
+
+Entonces la existencia de $ h $ es consecuencia directa de lo demostrado en el punto anterior.
+\end{proof}
+\end{enumerate}
+\item \begin{enumerate}[label = (\textbf{\alph*.})]
+\item Sean $ (X, \mathcal{M}, \mu) $, $ (Y, \mathcal{N}, \nu) $ espacios de medida $ \sigma- $finitos. Suponga que existe $ A \subset X $ tal que $ A \not \in \mathcal{M} $ y que existe $ B \in \mathcal{N} $ tal que $ \nu(B)=0 $. Muestre que entonces $ (X \times Y, \mathcal{M} \times \mathcal{N},\mu \times \nu) $ no es completo.
+
+\begin{proof}
+Vamos a demostrar que $ A \times B $ es el testigo que $ X \times Y $ no es completo.
+
+En primer lugar vamos a demostrar que el rectángulo $ X \times B $ tiene medida 0. Por la definición de la medida $ \mu \times \nu $ tenemos que
+
+$$ \mu \times \nu(X \times B) = \int_X \nu((X \times B)_x) \text{ }d\mu $$
+
+Tenemos que $ (X \times B)_x $ es $ B $ para todo $ x \in X $. Luego
+
+$$ \mu \times \nu(X \times B) = \int_X \nu(B) \text{ }d\mu  =  \int_X 0 \text{ }d\mu = 0$$
+
+Claramente $ A \times B $ es un subconjunto de $ X \times B $, sin embargo este conjunto no se encuentra en la $ \sigma $- álgebra.
+
+Para demostrar esto supongase que pertenece a la $ \sigma- $álgebra. Por el Teorema 21.4 p.380 tenemos que todo conjunto $ E^y $ pertenece a $ \mathcal{M} $ pero si tomamos $ y \in B $, entonces $ E^y = A $ y por hipótesis $ A \not \in \mathcal{M} $. Llegamos a una contradicción concluimos que $ A \times B $ no esta la $ \sigma- $álgebra y por lo tanto la medida no es completa.
+\end{proof}
+
+\item Muestre que $ (\mathbb{R}^2, \mathcal{M}_\lambda \times \mathcal{M}_\lambda,\lambda \times \lambda) $ no es completo. (Este es el Ejercicio 21.21, p.392).
+
+\begin{proof}
+Por lo demostrado en el Teorema 10.28 p.135 sabemos de la existencia de un conjunto $ A $ que no se encuentra en $ \mathcal{M}_{\lambda} $. Este conjunto se conoce como el conjunto de Vitali. Por otra parte en la medida de Lebesgue todos los singletons tienen medida 0. Por lo tanto podemos tomar $ B = \{0\} $. Entonces se cumplen todas las hipótesis del literal anterior y por lo tanto concluimos que el espacio medible $ \mathcal{R^2} $ no es completo.   
+\end{proof}
+\end{enumerate}
+\end{enumerate}
+\end{document}
